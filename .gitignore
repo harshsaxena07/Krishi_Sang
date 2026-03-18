@@ -1,0 +1,72 @@
+# =========================
+# Node.js / Backend / Frontend
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Build folders
+# =========================
+dist/
+build/
+dist-ssr/
+.next/
+.out/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+*.local
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# ML Models (IMPORTANT)
+# =========================
+backend/models/*.h5
+backend/models/*.keras
+backend/models/*.joblib
+backend/models/*.pkl
+
+# =========================
+# Python (for ML notebooks)
+# =========================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# =========================
+# Jupyter Notebook checkpoints
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# OS / Editor files
+# =========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# =========================
+# Optional: Images/Videos (if large)
+# =========================
+# Uncomment if needed
+# *.mp4
+# *.zip
+# *.tar
