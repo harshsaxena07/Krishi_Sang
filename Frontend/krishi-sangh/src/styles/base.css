@@ -129,3 +129,25 @@ p {
   background: var(--color-secondary-light);
   color: var(--color-primary-dark);
 }
+
+/* 🔥 OVERRIDE: prevent unwanted underline in navbar */
+.navbar a:hover {
+  text-decoration: none !important;
+}
+
+/* 🔥 BRAND HOVER EFFECT (no underline + scale + glow) */
+.navbar-brand {
+  text-decoration: none !important;
+  transition: all 0.25s ease;
+}
+
+.navbar-brand:hover {
+  text-decoration: none !important;
+  transform: scale(1.05);
+  text-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+/* 🔥 OPTIONAL: remove underline for all nav links */
+.navbar-links a:hover {
+  text-decoration: none !important;
+}

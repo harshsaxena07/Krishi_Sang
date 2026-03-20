@@ -8,7 +8,7 @@ export const loans = [
     documents: ['Identity proof', 'Address proof', 'Land records'],
     badge: 'Agriculture Credit',
     actionLabel: 'Learn More',
-    image: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=300&h=200&fit=crop',
+    image: "/images/kisanCard.jpg",
   },
   {
     id: '2',
@@ -18,6 +18,6 @@ export const loans = [
     documents: ['ID proof', 'Income proof', 'Equipment quotation'],
     badge: 'Equipment Loan',
     actionLabel: 'Learn More',
-    image: 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=300&h=200&fit=crop',
+    image: "/images/SBIAgri.jpg",
   },
 ];

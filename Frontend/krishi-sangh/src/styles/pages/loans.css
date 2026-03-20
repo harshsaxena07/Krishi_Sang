@@ -1,0 +1,207 @@
+/* Loans Page */
+.loans-page {
+  padding-bottom: var(--space-2xl);
+}
+
+.loans-page-wide {
+  width: 100%;
+}
+
+/* HEADER */
+.loans-page-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.loans-page-title {
+  margin: 0 0 8px;
+  font-size: var(--text-2xl);
+  color: var(--color-text);
+}
+
+.loans-page-subtitle {
+  margin: 0;
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* FILTERS */
+.loans-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.loan-filter-btn {
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.loan-filter-btn:hover {
+  background: rgba(76, 175, 80, 0.12);
+  border-color: var(--color-secondary);
+}
+
+.loan-filter-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+/* GRID */
+.loans-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .loans-detail-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* CARD */
+.loan-detail-card {
+  padding: 0;
+  overflow: hidden;
+  min-height: 200px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  border-radius: 14px;
+  transition: box-shadow 0.2s ease, transform 0.3s ease; /* ✅ ADD */
+}
+
+.loan-detail-card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px); /* ✅ ADD */
+}
+
+/* INNER */
+.loan-detail-card-inner {
+  display: flex;
+  align-items: stretch;
+  min-height: 220px;
+  height: 100%; /* ✅ ADD (important for full image height) */
+}
+
+/* CONTENT */
+.loan-detail-content {
+  flex: 1;
+  min-width: 0;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.loan-detail-title {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.loan-category-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--color-bg);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+  align-self: flex-start;
+}
+
+.loan-detail-description {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  flex: 1;
+}
+
+/* DOCUMENTS */
+.loan-documents {
+  margin: 0;
+}
+
+.loan-documents-label {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+
+.loan-documents-list {
+  margin: 4px 0 0;
+  padding-left: 20px;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.loan-documents-list li {
+  margin-bottom: 2px;
+}
+
+/* ACTIONS */
+.loan-detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto; /* ✅ CHANGE (push buttons down) */
+}
+
+/* IMAGE */
+.loan-detail-image-wrap {
+  width: 300px;
+  height: 273px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: stretch; /* ✅ CHANGE */
+  justify-content: center;
+  overflow: hidden;
+}
+
+.loan-detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ✅ CHANGE (fills full area like schemes) */
+  background: #f5f5f5;
+  transition: transform 0.5s ease; /* ✅ smoother */
+}
+
+.loan-detail-card:hover .loan-detail-image {
+  transform: scale(1.08); /* ✅ smoother zoom */
+}
+
+/* FOOTER */
+.loans-page-footer {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.loans-page-footer p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* EXTRA */
+.loan-eligibility-text {
+  margin: 6px 0 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}

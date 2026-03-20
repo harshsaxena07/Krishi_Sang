@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import SchemeDetailCard from '../components/schemes/SchemeDetailCard';
 import { schemes } from '../data/schemes';
+import "../styles/pages/schemes.css";
 
 const FILTER_ALL = 'all';
 const FILTER_CENTRAL = 'Central';

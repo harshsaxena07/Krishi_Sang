@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import "../styles/pages/home.css";
 
 function IconWrapper({ children }) {
   return (

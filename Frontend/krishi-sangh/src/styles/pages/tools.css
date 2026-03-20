@@ -1,0 +1,204 @@
+
+/* Tool rental marketplace */
+.tool-marketplace-page {
+  width: 100%;
+}
+
+.tool-marketplace-back {
+  margin-bottom: var(--space-lg);
+}
+
+.tool-marketplace-header {
+  margin-bottom: var(--space-sm);
+}
+
+.tool-marketplace-filters {
+  justify-content: flex-start;
+}
+
+.tool-filter-btn.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+.tool-marketplace-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+
+.tool-marketplace-card {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr) 230px;
+  align-items: stretch;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  padding: 0;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.tool-marketplace-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.tool-marketplace-image-wrap {
+  min-height: 230px;
+}
+
+.tool-marketplace-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tool-marketplace-info {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tool-marketplace-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tool-marketplace-title-row h3 {
+  margin: 0;
+  font-size: var(--text-xl);
+}
+
+.tool-marketplace-type {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--color-bg);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border);
+}
+
+.tool-marketplace-meta {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.tool-marketplace-features {
+  margin-top: 2px;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+
+.tool-marketplace-features strong {
+  display: inline-block;
+  margin-bottom: 4px;
+}
+
+.tool-marketplace-features ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--color-text-muted);
+}
+
+.tool-marketplace-features li {
+  margin-bottom: 2px;
+}
+
+.tool-marketplace-actions {
+  border-left: 1px solid var(--color-border);
+  background: #f8fbf8;
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.tool-availability-badge {
+  width: fit-content;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.tool-availability-badge.available {
+  background: #e8f5e9;
+  color: #1b5e20;
+  border: 1px solid #a5d6a7;
+}
+
+.tool-availability-badge.rented {
+  background: #ffebee;
+  color: #b71c1c;
+  border: 1px solid #ef9a9a;
+}
+
+.tool-marketplace-price {
+  margin: 2px 0 8px;
+  color: var(--color-primary);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.tool-marketplace-price span {
+  margin-left: 4px;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.tool-call-btn,
+.tool-book-btn {
+  width: 100%;
+  min-height: 44px;
+}
+
+.tool-call-btn {
+  background: white;
+}
+
+.tool-book-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Keep legacy classes for compatibility */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.tool-card-image {
+  width: 100%;
+  height: 160px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin: calc(-1 * var(--space-lg)) calc(-1 * var(--space-lg)) var(--space-lg);
+}
+
+.tool-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tool-card-content h3 {
+  margin: 0 0 var(--space-xs);
+}
+
+.tool-rate {
+  font-weight: 600;
+  color: var(--color-primary);
+  margin: 0 0 var(--space-md) !important;
+}

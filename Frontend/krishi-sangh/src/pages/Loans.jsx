@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import LoanCard from '../components/loans/LoanCard';
+import "../styles/pages/loans.css";
 
 const loans = [
   {
@@ -11,7 +12,7 @@ const loans = [
     eligibility: 'Farmers with valid land documents, Age 18-65 years',
     documents: ['Land ownership documents', 'Aadhaar card', 'PAN card', 'Income proof', 'Passport size photos'],
     officialWebsite: 'https://sbi.co.in/',
-    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900&h=650&fit=crop',
+    image: "/images/SBIAgri.jpg",
   },
   {
     id: '2',
@@ -21,7 +22,7 @@ const loans = [
     eligibility: 'Farmers, Agricultural laborers, Age 21-65 years',
     documents: ['KYC documents', 'Land records', 'Income proof', 'Quotation from dealer'],
     officialWebsite: 'https://sbi.co.in/',
-    image: 'https://images.unsplash.com/photo-1592982537447-6f2a6a0d2d1f?w=900&h=650&fit=crop',
+    image: "/images/sbitractor.jpg",
   },
   {
     id: '3',
@@ -31,7 +32,7 @@ const loans = [
     eligibility: 'Land-owning farmers with irrigation plan',
     documents: ['Land documents', 'Project report', 'Aadhaar & PAN', 'Bank statements'],
     officialWebsite: 'https://sbi.co.in/',
-    image: 'https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=900&h=650&fit=crop',
+    image: "/images/sbiirri.png",
   },
   {
     id: '4',
@@ -41,7 +42,7 @@ const loans = [
     eligibility: 'Farmers with minimum 1 acre land, Age 21-60 years',
     documents: ['Land papers', 'Identity proof', 'Address proof', 'Income certificate'],
     officialWebsite: 'https://hdfcbank.com/',
-    image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=900&h=650&fit=crop',
+    image: "/images/hdfckishandhan.jpg",
   },
   {
     id: '5',
@@ -51,7 +52,7 @@ const loans = [
     eligibility: 'Farmers and agricultural workers',
     documents: ['KYC documents', 'Land ownership proof', 'Quotation', '3 months bank statement'],
     officialWebsite: 'https://hdfcbank.com/',
-    image: 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=900&h=650&fit=crop',
+    image: "/images/hdfctractor.jpg",
   },
   {
     id: '6',
@@ -61,7 +62,7 @@ const loans = [
     eligibility: 'Entrepreneurs with business plan in agriculture sector',
     documents: ['Business plan', 'Project cost estimate', 'Land documents', 'Financial statements'],
     officialWebsite: 'https://hdfcbank.com/',
-    image: 'https://images.unsplash.com/photo-1559884743-74a57598c4c7?w=900&h=650&fit=crop',
+    image: "/images/hdfcbusines.png",
   },
   {
     id: '7',
@@ -71,7 +72,7 @@ const loans = [
     eligibility: 'Farmers owning agricultural land',
     documents: ['Land records', 'Aadhaar card', 'PAN card', 'Farming license if applicable'],
     officialWebsite: 'https://icicibank.com/',
-    image: 'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=900&h=650&fit=crop',
+    image: "/images/icci1.jpg",
   },
   {
     id: '8',
@@ -81,7 +82,7 @@ const loans = [
     eligibility: 'Individuals or groups interested in dairy farming',
     documents: ['Identity & address proof', 'Cattle purchase quotation', 'Shed/land documents', 'Training certificate'],
     officialWebsite: 'https://icicibank.com/',
-    image: 'https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=900&h=650&fit=crop',
+    image: "/images/icci2.jpg",
   },
   {
     id: '9',
@@ -91,7 +92,7 @@ const loans = [
     eligibility: 'Farmers with produce stored in accredited warehouses',
     documents: ['Warehouse receipt', 'Land ownership proof', 'KYC documents', 'Quality certificate'],
     officialWebsite: 'https://icicibank.com/',
-    image: 'https://images.unsplash.com/photo-1560493676-04071c5f467b?w=900&h=650&fit=crop',
+    image: "/images/icci3.jpg",
   },
   {
     id: '10',
@@ -101,7 +102,7 @@ const loans = [
     eligibility: 'All farmers owning agricultural land',
     documents: ['Land documents', 'Identity proof', 'Application form', 'Passport photos'],
     officialWebsite: 'https://pnb.co.in/',
-    image: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?w=900&h=650&fit=crop',
+   image: "/images/pnb.jpg",
   },
   {
     id: '11',
@@ -111,7 +112,7 @@ const loans = [
     eligibility: 'Farmers, contractors, transporters with valid documents',
     documents: ['KYC documents', 'Income proof', 'Dealer quotation', 'Land papers'],
     officialWebsite: 'https://pnb.co.in/',
-    image: 'https://images.unsplash.com/photo-1589923188900-85dae523342b?w=900&h=650&fit=crop',
+    image: "/images/pnb2.jpg",
   },
   {
     id: '12',
@@ -121,7 +122,7 @@ const loans = [
     eligibility: 'Farmers with suitable land for horticulture',
     documents: ['Land ownership certificate', 'Project report', 'Aadhaar & PAN', 'Technical approval'],
     officialWebsite: 'https://pnb.co.in/',
-    image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=900&h=650&fit=crop',
+    image: "/images/pnb3.jpg",
   },
 ];
 
@@ -165,18 +166,18 @@ export default function Loans() {
   }, [filter]);
 
   return (
-    <div className="page loans-page schemes-page loans-page-wide">
-      <header className="schemes-page-header">
-        <h1 className="schemes-page-title">{copy.title}</h1>
-        <p className="schemes-page-subtitle">{copy.description}</p>
+    <div className="page loans-page loans-page-wide">
+      <header className="loans-page-header">
+        <h1 className="loans-page-title">{copy.title}</h1>
+        <p className="loans-page-subtitle">{copy.description}</p>
       </header>
 
-      <div className="schemes-filters loans-filters" role="group" aria-label="Loan bank filters">
+      <div className="loans-filters" role="group" aria-label="Loan bank filters">
         {FILTERS.map((bank) => (
           <button
             key={bank}
             type="button"
-            className={`schemes-filter-btn loan-filter-btn ${filter === bank ? 'active' : ''}`}
+            className={`loan-filter-btn ${filter === bank ? 'active' : ''}`}
             onClick={() => setFilter(bank)}
           >
             {copy.filters[bank]}
@@ -184,7 +185,7 @@ export default function Loans() {
         ))}
       </div>
 
-      <div className="schemes-detail-grid loans-detail-grid">
+      <div className="loans-detail-grid">
         {filteredLoans.map((loan) => (
           <LoanCard key={loan.id} loan={loan} />
         ))}

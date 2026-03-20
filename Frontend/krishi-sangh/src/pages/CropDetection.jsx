@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import "../styles/pages/crop.css";
 
 const INITIAL_FORM = {
   nitrogen: '',

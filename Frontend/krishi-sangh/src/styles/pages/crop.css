@@ -1,0 +1,213 @@
+/* Crop recommendation page */
+.crop-recommendation-page {
+  width: 100%;
+  min-height: calc(100vh - var(--navbar-height) - 56px);
+  padding: 24px;
+  padding-bottom: 24px;
+  border-radius: 20px;
+  background: linear-gradient(to bottom right, #022c22, #064e3b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crop-recommendation-shell {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.crop-recommendation-header {
+  text-align: center;
+  color: #ecfdf5;
+}
+
+.crop-reco-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(16, 185, 129, 0.2);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.crop-recommendation-header h1 {
+  margin: 12px 0 8px;
+  color: #f0fdf4;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.crop-recommendation-header p {
+  margin: 0;
+  color: rgba(240, 253, 244, 0.9);
+}
+
+.crop-reco-card {
+  width: 100%;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(10px);
+}
+
+.crop-reco-card-head {
+  text-align: center;
+  color: #f0fdf4;
+  margin-bottom: 20px;
+}
+
+.crop-reco-card-head h2 {
+  margin: 0;
+}
+
+.crop-reco-card-head p {
+  margin: 8px 0 0;
+  color: rgba(236, 253, 245, 0.85);
+}
+
+.crop-reco-form {
+  display: grid;
+  gap: 16px;
+}
+
+.crop-reco-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.crop-reco-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #ecfdf5;
+  font-weight: 500;
+}
+
+.crop-reco-input-wrap {
+  position: relative;
+}
+
+.crop-reco-input-wrap input {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 76px 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(236, 253, 245, 0.26);
+  background: rgba(2, 44, 34, 0.7);
+  color: #f0fdf4;
+  font-size: var(--text-base);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.crop-reco-input-wrap input::placeholder {
+  color: rgba(236, 253, 245, 0.58);
+}
+
+.crop-reco-input-wrap input:focus {
+  border-color: #86efac;
+  box-shadow: 0 0 0 3px rgba(134, 239, 172, 0.2);
+}
+
+.crop-reco-input-wrap small {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: rgba(236, 253, 245, 0.8);
+}
+
+.crop-reco-submit {
+  width: 100%;
+  min-height: 50px;
+  border-radius: 12px;
+}
+
+/* RESULT SECTION */
+.crop-reco-result {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #0f3d2e, #14532d);
+  border-left: 6px solid #22c55e;
+  color: #e6f4ea;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.crop-reco-result h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #bbf7d0;
+}
+
+/* RESULT LAYOUT */
+.result-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.result-crop {
+  font-size: 22px;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+/* SHARED BADGE (used in multiple pages) */
+.confidence-badge {
+  background: #22c55e;
+  color: #022c22;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-left: 6px;
+  font-weight: 600;
+}
+
+/* DESCRIPTION */
+.result-description {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 15px;
+  line-height: 1.7;
+  border-left: 4px solid #22c55e;
+  color: #f0fdf4;
+}
+
+.result-description p {
+  margin-top: 6px;
+  color: #dcfce7;
+  font-weight: 500;
+}
+
+.result-description strong {
+  color: #86efac;
+  font-weight: 600;
+  display: block;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

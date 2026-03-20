@@ -16,7 +16,7 @@ export const schemes = [
     documents: ['Aadhaar Card', 'Land ownership documents', 'Bank account details', 'Mobile number'],
     documentsHi: ['आधार कार्ड', 'जमीन स्वामित्व दस्तावेज', 'बैंक खाता विवरण', 'मोबाइल नंबर'],
     officialUrl: 'https://pmkisan.gov.in/',
-    image: "/images/samannidhi.png",
+    image: "/images/pmkishaan.jpg",
   },
   {
     id: '2',
@@ -46,7 +46,7 @@ export const schemes = [
     documents: ['Identity proof', 'Address proof', 'Land records', 'Passport size photographs'],
     documentsHi: ['पहचान प्रमाण', 'पता प्रमाण', 'जमीन रिकॉर्ड', 'पासपोर्ट साइज फोटो'],
     officialUrl: 'https://www.rbi.org.in/',
-    image: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?w=500&h=320&fit=crop',
+    image: "/images/kisanCard.jpg",
   },
   {
     id: '4',
@@ -61,7 +61,7 @@ export const schemes = [
     documents: ['Farm loan documents', 'Land ownership proof', 'Income certificate', 'Aadhaar card'],
     documentsHi: ['कृषि ऋण दस्तावेज', 'जमीन स्वामित्व प्रमाण', 'आय प्रमाण पत्र', 'आधार कार्ड'],
     officialUrl: 'https://punjab.gov.in/',
-    image: 'https://images.unsplash.com/photo-1625245488616-009066d60f2d?w=500&h=320&fit=crop',
+    image: "/images/punjabloan.jpg",
   },
   {
     id: '5',
@@ -76,7 +76,7 @@ export const schemes = [
     documents: ['State domicile certificate', 'Crop details', 'Bank account details', 'Previous insurance records'],
     documentsHi: ['राज्य अधिवास प्रमाण पत्र', 'फसल विवरण', 'बैंक खाता विवरण', 'पिछले बीमा रिकॉर्ड'],
     officialUrl: 'https://maharashtra.gov.in/',
-    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=500&h=320&fit=crop',
+    image: "/images/maharastra.jpg",
   },
   {
     id: '6',
@@ -91,6 +91,6 @@ export const schemes = [
     documents: ['Electricity connection proof', 'Land documents', 'Technical feasibility report', 'Bank account details'],
     documentsHi: ['बिजली कनेक्शन प्रमाण', 'जमीन दस्तावेज', 'तकनीकी व्यवहार्यता रिपोर्ट', 'बैंक खाता विवरण'],
     officialUrl: 'https://karnataka.gov.in/',
-    image: 'https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=500&h=320&fit=crop',
+    image: "/images/karantaka.jpg",
   },
 ];

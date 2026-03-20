@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useMemo, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import ToolCard from '../components/tools/ToolCard';
+import "../styles/pages/tools.css";
 
 const tools = [
   {
@@ -19,7 +20,7 @@ const tools = [
     ownerHi: '\u0938\u0941\u0930\u0947\u0936 \u092a\u093e\u091f\u093f\u0932',
     features: ['45 HP Engine', 'Power Steering', 'Fuel Efficient'],
     featuresHi: ['45 HP \u0907\u0902\u091c\u0928', '\u092a\u093e\u0935\u0930 \u0938\u094d\u091f\u0940\u092f\u0930\u093f\u0902\u0917', '\u0908\u0902\u0927\u0928 \u092c\u091a\u0924'],
-    image: 'https://images.unsplash.com/photo-1592982537447-6f2a6a0d2d1f?w=1200&h=900&fit=crop',
+    image: "/images/Mahindra575DITractor.jpg",
   },
   {
     id: '2',
@@ -36,7 +37,7 @@ const tools = [
     ownerHi: '\u0930\u0935\u093f \u091a\u094c\u0939\u093e\u0928',
     features: ['Fast Crop Cutting', 'Low Grain Loss', 'Operator Cabin'],
     featuresHi: ['\u0924\u0947\u091c \u092b\u0938\u0932 \u0915\u091f\u093e\u0908', '\u0915\u092e \u0905\u0928\u093e\u091c \u0928\u0941\u0915\u0938\u093e\u0928', '\u0911\u092a\u0930\u0947\u091f\u0930 \u0915\u0948\u092c\u093f\u0928'],
-    image: 'https://images.unsplash.com/photo-1683835512900-4b59374f2074?w=1200&h=900&fit=crop',
+    image: "/images/johndhere.jpg",
   },
   {
     id: '3',
@@ -53,7 +54,7 @@ const tools = [
     ownerHi: '\u0905\u0928\u093f\u0924\u093e \u0926\u0947\u0936\u092e\u0941\u0916',
     features: ['Heavy Duty Blades', 'Depth Control', 'Quick Attachment'],
     featuresHi: ['\u0939\u0947\u0935\u0940 \u0921\u094d\u092f\u0942\u091f\u0940 \u092c\u094d\u0932\u0947\u0921\u094d\u0938', '\u0917\u0939\u0930\u093e\u0908 \u0915\u0902\u091f\u094d\u0930\u094b\u0932', '\u0915\u094d\u0935\u093f\u0915 \u0905\u091f\u0948\u091a\u092e\u0947\u0902\u091f'],
-    image: 'https://images.unsplash.com/photo-1625245488616-009066d60f2d?w=1200&h=900&fit=crop',
+    image: "/images/sonalikerota.jpg",
   },
   {
     id: '4',
@@ -70,7 +71,7 @@ const tools = [
     ownerHi: '\u0907\u092e\u0930\u093e\u0928 \u0916\u093e\u0928',
     features: ['55 HP Engine', 'Dual Clutch', 'Hydraulic Lift'],
     featuresHi: ['55 HP \u0907\u0902\u091c\u0928', '\u0921\u094d\u092f\u0942\u0905\u0932 \u0915\u094d\u0932\u091a', '\u0939\u093e\u0907\u0921\u094d\u0930\u094b\u0932\u093f\u0915 \u0932\u093f\u092b\u094d\u091f'],
-    image: 'https://images.unsplash.com/photo-1589923188900-85dae523342b?w=1200&h=900&fit=crop',
+    image: "/images/newhollan.jpg",
   },
   {
     id: '5',
@@ -87,7 +88,7 @@ const tools = [
     ownerHi: '\u0917\u0941\u0930\u092a\u094d\u0930\u0940\u0924 \u0938\u093f\u0902\u0939',
     features: ['Compact Design', 'Low Maintenance', 'GPS Ready'],
     featuresHi: ['\u0915\u0902\u092a\u0948\u0915\u094d\u091f \u0921\u093f\u091c\u093c\u093e\u0907\u0928', '\u0915\u092e \u092e\u0947\u0902\u091f\u0947\u0928\u0947\u0902\u0938', 'GPS \u0930\u0947\u0921\u0940'],
-    image: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&h=900&fit=crop',
+    image: "/images/kubota.jpg",
   },
   {
     id: '6',
@@ -104,7 +105,7 @@ const tools = [
     ownerHi: '\u092a\u0942\u091c\u093e \u0935\u0930\u094d\u092e\u093e',
     features: ['7ft Working Width', 'Smooth Soil Mixing', 'Strong Gearbox'],
     featuresHi: ['7ft \u0935\u0930\u094d\u0915\u093f\u0902\u0917 \u0935\u093f\u0921\u094d\u0925', '\u0938\u094d\u092e\u0942\u0925 \u0938\u0949\u092f\u0932 \u092e\u093f\u0915\u094d\u0938\u093f\u0902\u0917', '\u092e\u091c\u092c\u0942\u0924 \u0917\u093f\u092f\u0930\u092c\u0949\u0915\u094d\u0938'],
-    image: 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1200&h=900&fit=crop',
+    image: "/images/fieldmaster.jpg",
   },
 ];
 

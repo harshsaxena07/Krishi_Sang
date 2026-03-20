@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
-const API_URL = "http://127.0.0.1:5000/api/ai/disease-detection"; // ✅ ADD THIS
+const API_URL = "http://127.0.0.1:5000/api/ai/disease-detection"; 
 
 function UploadIcon() {
   return (
@@ -25,18 +25,6 @@ export default function ChatWindow() {
     if (preview) URL.revokeObjectURL(preview);
   }, [preview]);
 
-  // ❌ REMOVE THIS OLD MOCK useEffect
-  /*
-  useEffect(() => {
-    if (!image) return;
-    setResult({
-      disease: t.mockDiseaseName,
-      confidence: t.mockConfidenceValue,
-      description: t.mockDescriptionValue,
-      treatment: t.mockTreatmentValue,
-    });
-  }, [...]);
-  */
 
   // ✅ NEW: CALL BACKEND
   useEffect(() => {
