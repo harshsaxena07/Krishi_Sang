@@ -9,28 +9,35 @@ const INITIAL_FORM = {
   ph: '',
 };
 
-const API_URL = "http://127.0.0.1:5000/api/ai/crop-recommendation";
+const API_URL = "http://127.0.0.1:5001/api/ai/crop-recommendation";
 
 export default function CropDetection() {
   const { t } = useLanguage();
+
   const [formData, setFormData] = useState(INITIAL_FORM);
-  const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState(null);
+  const [showResult, setShowResult] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  // handle input change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => {
+      return { ...prev, [name]: value };
+    });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  // submit form
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     setLoading(true);
     setShowResult(false);
 
     try {
-      const response = await fetch(API_URL, {
+      console.log("Sending Data:", formData);
+
+      const res = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -43,10 +50,13 @@ export default function CropDetection() {
         }),
       });
 
-      const data = await response.json();
+      const data = await res.json();
 
-      if (!response.ok) {
-        throw new Error(data.error || "API Error");
+      console.log("API RESPONSE:", data);
+
+      if (!res.ok) {
+        console.error("Backend Error:", data);
+        throw new Error(data.error || "Error");
       }
 
       setResult({
@@ -57,12 +67,12 @@ export default function CropDetection() {
 
       setShowResult(true);
 
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error("Frontend Error:", err);
 
       setResult({
         crop: "Error",
-        description: "Failed to get recommendation",
+        description: "Could not get result",
         confidence: "-",
       });
 
@@ -74,16 +84,15 @@ export default function CropDetection() {
 
   return (
     <div className="page crop-recommendation-page">
+
       <section className="crop-recommendation-shell">
-        
-        {/* HEADER */}
+
         <header className="crop-recommendation-header">
           <span className="crop-reco-badge">{t.cropRecoBadge}</span>
           <h1>{t.cropRecoTitle}</h1>
           <p>{t.cropRecoSubtitle}</p>
         </header>
 
-        {/* CARD */}
         <div className="crop-reco-card">
 
           <div className="crop-reco-card-head">
@@ -91,11 +100,10 @@ export default function CropDetection() {
             <p>{t.cropRecoCardSubtitle}</p>
           </div>
 
-          {/* FORM */}
           <form className="crop-reco-form" onSubmit={handleSubmit}>
+
             <div className="crop-reco-grid">
 
-              {/* Nitrogen */}
               <label className="crop-reco-field">
                 <span>{t.cropRecoNitrogenLabel}</span>
                 <div className="crop-reco-input-wrap">
@@ -111,7 +119,6 @@ export default function CropDetection() {
                 </div>
               </label>
 
-              {/* Phosphorus */}
               <label className="crop-reco-field">
                 <span>{t.cropRecoPhosphorusLabel}</span>
                 <div className="crop-reco-input-wrap">
@@ -127,7 +134,6 @@ export default function CropDetection() {
                 </div>
               </label>
 
-              {/* Potassium */}
               <label className="crop-reco-field">
                 <span>{t.cropRecoPotassiumLabel}</span>
                 <div className="crop-reco-input-wrap">
@@ -143,7 +149,6 @@ export default function CropDetection() {
                 </div>
               </label>
 
-              {/* pH */}
               <label className="crop-reco-field">
                 <span>{t.cropRecoPhLabel}</span>
                 <div className="crop-reco-input-wrap">
@@ -162,16 +167,15 @@ export default function CropDetection() {
 
             </div>
 
-            {/* BUTTON */}
             <button type="submit" className="btn btn-secondary crop-reco-submit">
-              {loading ? "🔄 Analyzing..." : t.cropRecoSubmit}
+              {loading ? "Analyzing..." : t.cropRecoSubmit}
             </button>
+
           </form>
 
-          {/* RESULT */}
           {showResult && result && (
-            <section className="crop-reco-result" aria-live="polite">
-              
+            <section className="crop-reco-result">
+
               <h3>{t.cropRecoResultTitle}</h3>
 
               <div className="result-main">

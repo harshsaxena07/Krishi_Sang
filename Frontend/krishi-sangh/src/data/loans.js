@@ -1,4 +1,4 @@
-// Mock data for bank loans - replace with API later
+// Mock data for bank loans - replace with API later which is present on the home page
 export const loans = [
   {
     id: '1',

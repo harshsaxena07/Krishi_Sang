@@ -1,0 +1,104 @@
+[
+  {
+    "id": 1,
+    "name": "SBI Agriculture Loan",
+    "name_hi": "एसबीआई कृषि ऋण",
+    "bank": "SBI",
+    "purpose": "For purchasing seeds, fertilizers, pesticides, and farming equipment",
+    "purpose_hi": "बीज, उर्वरक, कीटनाशक और कृषि उपकरण खरीदने के लिए",
+    "eligibility": "Farmers with valid land documents, Age 18-65 years",
+    "eligibility_hi": "वैध भूमि दस्तावेज़ वाले किसान, आयु 18-65 वर्ष",
+    "documents": [
+      "Land ownership documents",
+      "Aadhaar card",
+      "PAN card",
+      "Income proof",
+      "Passport size photos"
+    ],
+    "documents_hi": [
+      "भूमि स्वामित्व दस्तावेज",
+      "आधार कार्ड",
+      "पैन कार्ड",
+      "आय प्रमाण",
+      "पासपोर्ट फोटो"
+    ],
+    "official_website": "https://sbi.co.in/",
+    "image": "/images/SBIAgri.jpg",
+    "created_at": ""
+  },
+  {
+    "id": 2,
+    "name": "SBI Tractor Loan",
+    "name_hi": "एसबीआई ट्रैक्टर ऋण",
+    "bank": "SBI",
+    "purpose": "Finance for purchasing tractors and farm machinery",
+    "purpose_hi": "ट्रैक्टर और कृषि मशीनरी खरीदने के लिए वित्त",
+    "eligibility": "Farmers, Agricultural laborers, Age 21-65 years",
+    "eligibility_hi": "किसान, कृषि मजदूर, आयु 21-65 वर्ष",
+    "documents": [
+      "KYC documents",
+      "Land records",
+      "Income proof",
+      "Quotation from dealer"
+    ],
+    "documents_hi": [
+      "केवाईसी दस्तावेज",
+      "भूमि रिकॉर्ड",
+      "आय प्रमाण",
+      "डीलर से कोटेशन"
+    ],
+    "official_website": "https://sbi.co.in/",
+    "image": "/images/sbitractor.jpg",
+    "created_at": ""
+  },
+  {
+    "id": 3,
+    "name": "SBI Irrigation Loan",
+    "name_hi": "एसबीआई सिंचाई ऋण",
+    "bank": "SBI",
+    "purpose": "For installing pumps, drip irrigation, and water management systems",
+    "purpose_hi": "पंप, ड्रिप सिंचाई और जल प्रबंधन प्रणाली लगाने के लिए",
+    "eligibility": "Land-owning farmers with irrigation plan",
+    "eligibility_hi": "सिंचाई योजना वाले भूमि स्वामी किसान",
+    "documents": [
+      "Land documents",
+      "Project report",
+      "Aadhaar & PAN",
+      "Bank statements"
+    ],
+    "documents_hi": [
+      "भूमि दस्तावेज",
+      "प्रोजेक्ट रिपोर्ट",
+      "आधार और पैन",
+      "बैंक स्टेटमेंट"
+    ],
+    "official_website": "https://sbi.co.in/",
+    "image": "/images/sbiirri.png",
+    "created_at": ""
+  },
+  {
+    "id": 4,
+    "name": "HDFC Kisan Dhan Loan",
+    "name_hi": "एचडीएफसी किसान धन ऋण",
+    "bank": "HDFC",
+    "purpose": "Short-term loan for crop cultivation and agricultural expenses",
+    "purpose_hi": "फसल उत्पादन और कृषि खर्च के लिए अल्पकालिक ऋण",
+    "eligibility": "Farmers with minimum 1 acre land, Age 21-60 years",
+    "eligibility_hi": "कम से कम 1 एकड़ भूमि वाले किसान, आयु 21-60 वर्ष",
+    "documents": [
+      "Land papers",
+      "Identity proof",
+      "Address proof",
+      "Income certificate"
+    ],
+    "documents_hi": [
+      "भूमि दस्तावेज",
+      "पहचान प्रमाण",
+      "पता प्रमाण",
+      "आय प्रमाण पत्र"
+    ],
+    "official_website": "https://hdfcbank.com/",
+    "image": "/images/hdfckishandhan.jpg",
+    "created_at": ""
+  }
+]

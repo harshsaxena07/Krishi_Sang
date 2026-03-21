@@ -1,0 +1,158 @@
+[
+  {
+    "id": 1,
+    "title": "PM-KISAN Samman Nidhi",
+    "description": "Income Support",
+    "name": "PM-KISAN Samman Nidhi",
+    "name_hi": "पीएम-किसान सम्मान निधि",
+    "category": "Central",
+    "category_hi": "केंद्रीय",
+    "description_long": "Income support of ₹6000 per year to all farmer families. The amount is transferred directly to bank accounts in three equal installments of ₹2000 each.",
+    "description_hi": "सभी किसान परिवारों को प्रति वर्ष ₹6000 की आय सहायता। राशि तीन बराबर किस्तों में ₹2000 प्रत्येक सीधे बैंक खातों में स्थानांतरित की जाती है।",
+    "documents": [
+      "Aadhaar Card",
+      "Land ownership documents",
+      "Bank account details",
+      "Mobile number"
+    ],
+    "documents_hi": [
+      "आधार कार्ड",
+      "जमीन स्वामित्व दस्तावेज",
+      "बैंक खाता विवरण",
+      "मोबाइल नंबर"
+    ],
+    "official_url": "https://pmkisan.gov.in/",
+    "image": "/images/pmkishaan.jpg",
+    "created_at": ""
+  },
+  {
+    "id": 2,
+    "title": "Pradhan Mantri Fasal Bima Yojana",
+    "description": "Crop Insurance",
+    "name": "Pradhan Mantri Fasal Bima Yojana",
+    "name_hi": "प्रधानमंत्री फसल बीमा योजना",
+    "category": "Central",
+    "category_hi": "केंद्रीय",
+    "description_long": "Crop insurance scheme protecting farmers against crop loss due to natural calamities, pests, and diseases. Very low premium rates with high coverage.",
+    "description_hi": "प्राकृतिक आपदाओं, कीटों और बीमारियों के कारण फसल नुकसान से किसानों की सुरक्षा करने वाली फसल बीमा योजना। उच्च कवरेज के साथ बहुत कम प्रीमियम दरें।",
+    "documents": [
+      "Aadhaar Card",
+      "Bank account passbook",
+      "Land records or ownership proof",
+      "Sowing certificate from Patwari"
+    ],
+    "documents_hi": [
+      "आधार कार्ड",
+      "बैंक खाता पासबुक",
+      "जमीन रिकॉर्ड या स्वामित्व प्रमाण",
+      "पटवारी से बोवाई प्रमाण पत्र"
+    ],
+    "official_url": "https://pmfby.gov.in/",
+    "image": "/images/fasalbima.jpg",
+    "created_at": ""
+  },
+  {
+    "id": 3,
+    "title": "Kisan Credit Card (KCC)",
+    "description": "Easy credit for farmers",
+    "name": "Kisan Credit Card (KCC)",
+    "name_hi": "किसान क्रेडिट कार्ड",
+    "category": "Central",
+    "category_hi": "केंद्रीय",
+    "description_long": "Easy credit facility for farmers to meet farming expenses including seeds, fertilizers, and equipment.",
+    "description_hi": "बीज, उर्वरक और उपकरण सहित खेती के खर्चों को पूरा करने के लिए किसानों के लिए आसान ऋण सुविधा।",
+    "documents": [
+      "Identity proof",
+      "Address proof",
+      "Land records",
+      "Passport size photographs"
+    ],
+    "documents_hi": [
+      "पहचान प्रमाण",
+      "पता प्रमाण",
+      "जमीन रिकॉर्ड",
+      "पासपोर्ट साइज फोटो"
+    ],
+    "official_url": "https://www.rbi.org.in/",
+    "image": "/images/kisanCard.jpg",
+    "created_at": ""
+  },
+  {
+    "id": 4,
+    "title": "Punjab Farm Loan Waiver",
+    "description": "State farm loan waiver",
+    "name": "Punjab Farm Loan Waiver",
+    "name_hi": "पंजाब कृषि ऋण माफी",
+    "category": "State",
+    "category_hi": "राज्य",
+    "description_long": "State government initiative to waive farm loans for small and marginal farmers.",
+    "description_hi": "छोटे और सीमांत किसानों के लिए कृषि ऋण माफी की राज्य सरकार की पहल।",
+    "documents": [
+      "Farm loan documents",
+      "Land ownership proof",
+      "Income certificate",
+      "Aadhaar card"
+    ],
+    "documents_hi": [
+      "कृषि ऋण दस्तावेज",
+      "जमीन स्वामित्व प्रमाण",
+      "आय प्रमाण पत्र",
+      "आधार कार्ड"
+    ],
+    "official_url": "https://punjab.gov.in/",
+    "image": "/images/punjabloan.jpg",
+    "created_at": ""
+  },
+  {
+    "id": 5,
+    "title": "Maharashtra Crop Insurance",
+    "description": "State crop insurance",
+    "name": "Maharashtra Crop Insurance",
+    "name_hi": "महाराष्ट्र फसल बीमा",
+    "category": "State",
+    "category_hi": "राज्य",
+    "description_long": "State-specific crop insurance scheme providing additional coverage beyond central schemes.",
+    "description_hi": "केंद्रीय योजनाओं के अतिरिक्त कवरेज प्रदान करने वाली राज्य-विशिष्ट फसल बीमा योजना।",
+    "documents": [
+      "State domicile certificate",
+      "Crop details",
+      "Bank account details",
+      "Previous insurance records"
+    ],
+    "documents_hi": [
+      "राज्य अधिवास प्रमाण पत्र",
+      "फसल विवरण",
+      "बैंक खाता विवरण",
+      "पिछले बीमा रिकॉर्ड"
+    ],
+    "official_url": "https://maharashtra.gov.in/",
+    "image": "/images/maharastra.jpg",
+    "created_at": ""
+  },
+  {
+    "id": 6,
+    "title": "Karnataka Solar Pump Subsidy",
+    "description": "Solar pump subsidy",
+    "name": "Karnataka Solar Pump Subsidy",
+    "name_hi": "कर्नाटक सोलर पंप सब्सिडी",
+    "category": "State",
+    "category_hi": "राज्य",
+    "description_long": "Subsidy scheme for installing solar-powered irrigation pumps.",
+    "description_hi": "सौर ऊर्जा से चलने वाले सिंचाई पंप लगाने के लिए सब्सिडी योजना।",
+    "documents": [
+      "Electricity connection proof",
+      "Land documents",
+      "Technical feasibility report",
+      "Bank account details"
+    ],
+    "documents_hi": [
+      "बिजली कनेक्शन प्रमाण",
+      "जमीन दस्तावेज",
+      "तकनीकी व्यवहार्यता रिपोर्ट",
+      "बैंक खाता विवरण"
+    ],
+    "official_url": "https://karnataka.gov.in/",
+    "image": "/images/karantaka.jpg",
+    "created_at": ""
+  }
+]

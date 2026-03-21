@@ -9,14 +9,32 @@ export default function LoanCard({ loan }) {
   const { language } = useLanguage();
   const [showDetails, setShowDetails] = useState(false);
   const speechInProgress = useRef(false);
-  const documents = Array.isArray(loan.documents) ? loan.documents : [];
 
-  const ui = language === 'hi'
+  const isHindi = language === 'hi';
+
+  // Multilingual support (backend + old frontend)
+  const name = isHindi
+    ? (loan.name_hi || loan.nameHi || loan.name)
+    : loan.name;
+
+  const purpose = isHindi
+    ? (loan.purpose_hi || loan.purposeHi || loan.purpose)
+    : loan.purpose;
+
+  const eligibility = isHindi
+    ? (loan.eligibility_hi || loan.eligibilityHi || loan.eligibility)
+    : loan.eligibility;
+
+  const documents = isHindi
+    ? (loan.documents_hi || loan.documentsHi || [])
+    : (Array.isArray(loan.documents) ? loan.documents : []);
+
+  const ui = isHindi
     ? {
-        eligibility: '\u092a\u093e\u0924\u094d\u0930\u0924\u093e',
-        requiredDocuments: '\u0906\u0935\u0936\u094d\u092f\u0915 \u0926\u0938\u094d\u0924\u093e\u0935\u0947\u091c',
-        details: '\u0935\u093f\u0935\u0930\u0923',
-        knowMoreApply: '\u0914\u0930 \u091c\u093e\u0928\u0947\u0902 / \u0906\u0935\u0947\u0926\u0928 \u0915\u0930\u0947\u0902',
+        eligibility: 'पात्रता',
+        requiredDocuments: 'आवश्यक दस्तावेज',
+        details: 'विवरण',
+        knowMoreApply: 'और जानें / आवेदन करें',
       }
     : {
         eligibility: 'Eligibility',
@@ -25,26 +43,30 @@ export default function LoanCard({ loan }) {
         knowMoreApply: 'Know More / Apply',
       };
 
+  const officialLink = loan.official_website || loan.officialWebsite;
+
   const openOfficialWebsite = () => {
-    if (loan.officialWebsite) {
-      window.open(loan.officialWebsite, '_blank', 'noopener,noreferrer');
+    if (officialLink) {
+      window.open(officialLink, '_blank', 'noopener,noreferrer');
     }
   };
+
+  const imageSrc = loan.image || "/images/default-loan.jpg";
 
   return (
     <article className="card scheme-detail-card loan-detail-card">
       <div className="scheme-detail-card-inner loan-detail-card-inner">
 
         <div className="scheme-detail-content loan-detail-content">
-          <h3 className="scheme-detail-title">{loan.name}</h3>
+          <h3 className="scheme-detail-title">{name}</h3>
           <span className="scheme-category-badge">{loan.bank}</span>
-          <p className="scheme-detail-description">{loan.purpose}</p>
+          <p className="scheme-detail-description">{purpose}</p>
 
           {showDetails && (
             <>
               <div className="scheme-documents">
                 <strong className="scheme-documents-label">{ui.eligibility}:</strong>
-                <p className="loan-eligibility-text">{loan.eligibility}</p>
+                <p className="loan-eligibility-text">{eligibility}</p>
               </div>
 
               <div className="scheme-documents">
@@ -71,6 +93,7 @@ export default function LoanCard({ loan }) {
               type="button"
               className="btn btn-secondary"
               onClick={openOfficialWebsite}
+              disabled={!officialLink}
             >
               {ui.knowMoreApply}
             </button>
@@ -79,9 +102,12 @@ export default function LoanCard({ loan }) {
 
         <div className="scheme-detail-image-wrap loan-detail-image-wrap">
           <img
-            src={loan.image}
-            alt={loan.name}
+            src={imageSrc}
+            alt={name}
             className="scheme-detail-image loan-detail-image"
+            onError={(e) => {
+              e.target.src = "/images/default-loan.jpg";
+            }}
           />
         </div>
 

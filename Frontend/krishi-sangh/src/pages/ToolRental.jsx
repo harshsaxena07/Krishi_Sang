@@ -1,131 +1,32 @@
 import { Link } from 'react-router-dom';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import ToolCard from '../components/tools/ToolCard';
 import "../styles/pages/tools.css";
 
-const tools = [
-  {
-    id: '1',
-    name: 'Mahindra 575 DI Tractor',
-    nameHi: '\u092e\u0939\u093f\u0902\u0926\u094d\u0930\u093e 575 DI \u091f\u094d\u0930\u0948\u0915\u094d\u091f\u0930',
-    type: 'Tractors',
-    typeHi: '\u091f\u094d\u0930\u0948\u0915\u094d\u091f\u0930',
-    pricePerDay: 2500,
-    rating: 4.8,
-    available: true,
-    location: 'Nashik, Maharashtra',
-    locationHi: '\u0928\u093e\u0936\u093f\u0915, \u092e\u0939\u093e\u0930\u093e\u0937\u094d\u091f\u094d\u0930',
-    owner: 'Suresh Patil',
-    ownerHi: '\u0938\u0941\u0930\u0947\u0936 \u092a\u093e\u091f\u093f\u0932',
-    features: ['45 HP Engine', 'Power Steering', 'Fuel Efficient'],
-    featuresHi: ['45 HP \u0907\u0902\u091c\u0928', '\u092a\u093e\u0935\u0930 \u0938\u094d\u091f\u0940\u092f\u0930\u093f\u0902\u0917', '\u0908\u0902\u0927\u0928 \u092c\u091a\u0924'],
-    image: "/images/Mahindra575DITractor.jpg",
-  },
-  {
-    id: '2',
-    name: 'John Deere Harvester',
-    nameHi: '\u091c\u0949\u0928 \u0921\u0940\u092f\u0930 \u0939\u093e\u0930\u094d\u0935\u0947\u0938\u094d\u091f\u0930',
-    type: 'Harvesters',
-    typeHi: '\u0939\u093e\u0930\u094d\u0935\u0947\u0938\u094d\u091f\u0930',
-    pricePerDay: 4200,
-    rating: 4.6,
-    available: true,
-    location: 'Indore, Madhya Pradesh',
-    locationHi: '\u0907\u0902\u0926\u094c\u0930, \u092e\u0927\u094d\u092f \u092a\u094d\u0930\u0926\u0947\u0936',
-    owner: 'Ravi Chouhan',
-    ownerHi: '\u0930\u0935\u093f \u091a\u094c\u0939\u093e\u0928',
-    features: ['Fast Crop Cutting', 'Low Grain Loss', 'Operator Cabin'],
-    featuresHi: ['\u0924\u0947\u091c \u092b\u0938\u0932 \u0915\u091f\u093e\u0908', '\u0915\u092e \u0905\u0928\u093e\u091c \u0928\u0941\u0915\u0938\u093e\u0928', '\u0911\u092a\u0930\u0947\u091f\u0930 \u0915\u0948\u092c\u093f\u0928'],
-    image: "/images/johndhere.jpg",
-  },
-  {
-    id: '3',
-    name: 'Sonalika Rotavator Pro',
-    nameHi: '\u0938\u094b\u0928\u093e\u0932\u093f\u0915\u093e \u0930\u094b\u091f\u093e\u0935\u0947\u091f\u0930 \u092a\u094d\u0930\u094b',
-    type: 'Rotavators',
-    typeHi: '\u0930\u094b\u091f\u093e\u0935\u0947\u091f\u0930',
-    pricePerDay: 1800,
-    rating: 4.7,
-    available: false,
-    location: 'Nagpur, Maharashtra',
-    locationHi: '\u0928\u093e\u0917\u092a\u0941\u0930, \u092e\u0939\u093e\u0930\u093e\u0937\u094d\u091f\u094d\u0930',
-    owner: 'Anita Deshmukh',
-    ownerHi: '\u0905\u0928\u093f\u0924\u093e \u0926\u0947\u0936\u092e\u0941\u0916',
-    features: ['Heavy Duty Blades', 'Depth Control', 'Quick Attachment'],
-    featuresHi: ['\u0939\u0947\u0935\u0940 \u0921\u094d\u092f\u0942\u091f\u0940 \u092c\u094d\u0932\u0947\u0921\u094d\u0938', '\u0917\u0939\u0930\u093e\u0908 \u0915\u0902\u091f\u094d\u0930\u094b\u0932', '\u0915\u094d\u0935\u093f\u0915 \u0905\u091f\u0948\u091a\u092e\u0947\u0902\u091f'],
-    image: "/images/sonalikerota.jpg",
-  },
-  {
-    id: '4',
-    name: 'New Holland Tractor 5620',
-    nameHi: '\u0928\u094d\u092f\u0942 \u0939\u0949\u0932\u0948\u0902\u0921 \u091f\u094d\u0930\u0948\u0915\u094d\u091f\u0930 5620',
-    type: 'Tractors',
-    typeHi: '\u091f\u094d\u0930\u0948\u0915\u094d\u091f\u0930',
-    pricePerDay: 3000,
-    rating: 4.5,
-    available: true,
-    location: 'Meerut, Uttar Pradesh',
-    locationHi: '\u092e\u0947\u0930\u0920, \u0909\u0924\u094d\u0924\u0930 \u092a\u094d\u0930\u0926\u0947\u0936',
-    owner: 'Imran Khan',
-    ownerHi: '\u0907\u092e\u0930\u093e\u0928 \u0916\u093e\u0928',
-    features: ['55 HP Engine', 'Dual Clutch', 'Hydraulic Lift'],
-    featuresHi: ['55 HP \u0907\u0902\u091c\u0928', '\u0921\u094d\u092f\u0942\u0905\u0932 \u0915\u094d\u0932\u091a', '\u0939\u093e\u0907\u0921\u094d\u0930\u094b\u0932\u093f\u0915 \u0932\u093f\u092b\u094d\u091f'],
-    image: "/images/newhollan.jpg",
-  },
-  {
-    id: '5',
-    name: 'Kubota Smart Harvester',
-    nameHi: '\u0915\u0941\u092c\u094b\u091f\u093e \u0938\u094d\u092e\u093e\u0930\u094d\u091f \u0939\u093e\u0930\u094d\u0935\u0947\u0938\u094d\u091f\u0930',
-    type: 'Harvesters',
-    typeHi: '\u0939\u093e\u0930\u094d\u0935\u0947\u0938\u094d\u091f\u0930',
-    pricePerDay: 3900,
-    rating: 4.4,
-    available: false,
-    location: 'Ludhiana, Punjab',
-    locationHi: '\u0932\u0941\u0927\u093f\u092f\u093e\u0928\u093e, \u092a\u0902\u091c\u093e\u092c',
-    owner: 'Gurpreet Singh',
-    ownerHi: '\u0917\u0941\u0930\u092a\u094d\u0930\u0940\u0924 \u0938\u093f\u0902\u0939',
-    features: ['Compact Design', 'Low Maintenance', 'GPS Ready'],
-    featuresHi: ['\u0915\u0902\u092a\u0948\u0915\u094d\u091f \u0921\u093f\u091c\u093c\u093e\u0907\u0928', '\u0915\u092e \u092e\u0947\u0902\u091f\u0947\u0928\u0947\u0902\u0938', 'GPS \u0930\u0947\u0921\u0940'],
-    image: "/images/kubota.jpg",
-  },
-  {
-    id: '6',
-    name: 'FieldMaster Rotavator 7ft',
-    nameHi: '\u092b\u0940\u0932\u094d\u0921\u092e\u093e\u0938\u094d\u091f\u0930 \u0930\u094b\u091f\u093e\u0935\u0947\u091f\u0930 7ft',
-    type: 'Rotavators',
-    typeHi: '\u0930\u094b\u091f\u093e\u0935\u0947\u091f\u0930',
-    pricePerDay: 1600,
-    rating: 4.9,
-    available: true,
-    location: 'Bhopal, Madhya Pradesh',
-    locationHi: '\u092d\u094b\u092a\u093e\u0932, \u092e\u0927\u094d\u092f \u092a\u094d\u0930\u0926\u0947\u0936',
-    owner: 'Pooja Verma',
-    ownerHi: '\u092a\u0942\u091c\u093e \u0935\u0930\u094d\u092e\u093e',
-    features: ['7ft Working Width', 'Smooth Soil Mixing', 'Strong Gearbox'],
-    featuresHi: ['7ft \u0935\u0930\u094d\u0915\u093f\u0902\u0917 \u0935\u093f\u0921\u094d\u0925', '\u0938\u094d\u092e\u0942\u0925 \u0938\u0949\u092f\u0932 \u092e\u093f\u0915\u094d\u0938\u093f\u0902\u0917', '\u092e\u091c\u092c\u0942\u0924 \u0917\u093f\u092f\u0930\u092c\u0949\u0915\u094d\u0938'],
-    image: "/images/fieldmaster.jpg",
-  },
-];
+const API_URL = "http://127.0.0.1:5001/api/tools";
 
 const CATEGORY_FILTERS = ['all', 'Tractors', 'Harvesters', 'Rotavators'];
 
 export default function ToolRental() {
   const { language } = useLanguage();
+
   const [activeCategory, setActiveCategory] = useState('all');
+  const [tools, setTools] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [warning, setWarning] = useState("");
 
   const labels = language === 'hi'
     ? {
-        back: '\u0921\u0948\u0936\u092c\u094b\u0930\u094d\u0921 \u092a\u0930 \u0935\u093e\u092a\u0938',
-        title: '\u0915\u0943\u0937\u093f \u0909\u092a\u0915\u0930\u0923 \u0915\u093f\u0930\u093e\u090f \u092a\u0930 \u0932\u0947\u0902',
+        back: 'डैशबोर्ड पर वापस',
+        title: 'कृषि उपकरण किराए पर लें',
         description:
-          '\u0905\u092a\u0928\u0947 \u0928\u091c\u093c\u0926\u0940\u0915\u0940 \u0915\u093f\u0938\u093e\u0928\u094b\u0902 \u0914\u0930 \u0909\u092a\u0915\u0930\u0923 \u092e\u093e\u0932\u093f\u0915\u094b\u0902 \u0938\u0947 \u092a\u0947\u0936\u0947\u0935\u0930 \u0938\u094d\u0924\u0930 \u0915\u0947 \u091f\u094d\u0930\u0948\u0915\u094d\u091f\u0930, \u0939\u093e\u0930\u094d\u0935\u0947\u0938\u094d\u091f\u0930 \u0914\u0930 \u0930\u094b\u091f\u093e\u0935\u0947\u091f\u0930 \u0915\u093f\u0930\u093e\u090f \u092a\u0930 \u092c\u0941\u0915 \u0915\u0930\u0947\u0902\u0964',
+          'अपने नज़दीकी किसानों और उपकरण मालिकों से पेशेवर स्तर के ट्रैक्टर, हार्वेस्टर और रोटावेटर किराए पर बुक करें।',
         filters: {
-          all: '\u0938\u092d\u0940 \u0909\u092a\u0915\u0930\u0923',
-          Tractors: '\u091f\u094d\u0930\u0948\u0915\u094d\u091f\u0930',
-          Harvesters: '\u0939\u093e\u0930\u094d\u0935\u0947\u0938\u094d\u091f\u0930',
-          Rotavators: '\u0930\u094b\u091f\u093e\u0935\u0947\u091f\u0930',
+          all: 'सभी उपकरण',
+          Tractors: 'ट्रैक्टर',
+          Harvesters: 'हार्वेस्टर',
+          Rotavators: 'रोटावेटर',
         },
       }
     : {
@@ -141,13 +42,60 @@ export default function ToolRental() {
         },
       };
 
+  // Fetch tools with caching
+  useEffect(() => {
+    const fetchTools = async () => {
+      try {
+        const cached = localStorage.getItem("tools_cache");
+
+        if (cached) {
+          const { data } = JSON.parse(cached);
+          setTools(data);
+          setLoading(false);
+        }
+
+        const res = await fetch(API_URL);
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch tools");
+        }
+
+        const response = await res.json();
+
+        if (response.source === "local") {
+          setWarning(response.message);
+        }
+
+        const freshData = response.data || [];
+
+        setTools(freshData);
+
+        localStorage.setItem("tools_cache", JSON.stringify({
+          data: freshData,
+          timestamp: new Date().getTime()
+        }));
+
+      } catch (error) {
+        console.error("Error fetching tools:", error);
+        setTools([]);
+        setWarning("Unable to load data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTools();
+  }, []);
+
+  // Filter tools
   const filteredTools = useMemo(() => {
     if (activeCategory === 'all') return tools;
     return tools.filter((tool) => tool.type === activeCategory);
-  }, [activeCategory]);
+  }, [activeCategory, tools]);
 
   return (
     <div className="page tool-rental-page tool-marketplace-page">
+
       <Link to="/dashboard" className="tool-marketplace-back btn btn-outline">
         {labels.back}
       </Link>
@@ -170,11 +118,24 @@ export default function ToolRental() {
         ))}
       </div>
 
-      <div className="tool-marketplace-list">
-        {filteredTools.map((tool) => (
-          <ToolCard key={tool.id} tool={tool} />
-        ))}
-      </div>
+      {/* Warning */}
+      {warning && (
+        <p style={{ textAlign: "center", color: "orange" }}>
+          {warning}
+        </p>
+      )}
+
+      {/* Loading */}
+      {loading ? (
+        <p style={{ textAlign: "center" }}>Loading tools...</p>
+      ) : (
+        <div className="tool-marketplace-list">
+          {filteredTools.map((tool) => (
+            <ToolCard key={tool.id} tool={tool} />
+          ))}
+        </div>
+      )}
+
     </div>
   );
 }

@@ -4,26 +4,36 @@ import { useLanguage } from '../../context/LanguageContext';
 import { languageOptions } from '../../translations';
 
 export default function Navbar() {
-  //mobile menu open/close
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [profileOpen, setProfileOpen] = useState(false);
+  // state for mobile menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // state for profile dropdown
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
   const { language, setLanguage, t } = useLanguage();
 
+  // navigation links
   const navLinks = [
-    { to: '/', label: t.navHome },
-    { to: '/dashboard', label: t.navDashboard },
-    { to: '/chatbot', label: t.navChatbot || 'Disease Detection' },
-    { to: '/crop-detection', label: t.navCropDetection || 'Crop Recommendation' },
-    { to: '/tool-rental', label: t.navToolRental },
-    { to: '/schemes', label: t.navSchemes },
-    { to: '/loans', label: t.navLoans },
+    { path: '/', label: t.navHome },
+    { path: '/dashboard', label: t.navDashboard },
+    { path: '/chatbot', label: t.navChatbot || 'Disease Detection' },
+    { path: '/crop-detection', label: t.navCropDetection || 'Crop Recommendation' },
+    { path: '/tool-rental', label: t.navToolRental },
+    { path: '/schemes', label: t.navSchemes },
+    { path: '/loans', label: t.navLoans },
   ];
+
+  // handle link click (close menus)
+  const handleLinkClick = () => {
+    setIsMenuOpen(false);
+    setIsProfileOpen(false);
+  };
 
   return (
     <header className="navbar">
       <div className="navbar-inner">
 
-        {/* LEFT - BRAND */}
+        {/* Brand */}
         <NavLink to="/" className="navbar-brand">
           <div className="navbar-brand-text">
             <span className="brand-title">KrishiSangh</span>
@@ -31,28 +41,24 @@ export default function Navbar() {
           </div>
         </NavLink>
 
-        {/* RIGHT SIDE */}
         <div className="navbar-right">
 
-          {/* NAV LINKS */}
-          <nav className={`navbar-links ${menuOpen ? 'open' : ''}`}>
-            {navLinks.map(({ to, label }) => (
+          {/* Navigation Links */}
+          <nav className={`navbar-links ${isMenuOpen ? 'open' : ''}`}>
+            {navLinks.map((link) => (
               <NavLink
-                key={to}
-                to={to}
-                end={to === '/'}
+                key={link.path}
+                to={link.path}
+                end={link.path === '/'}
                 className={({ isActive }) => (isActive ? 'active' : '')}
-                onClick={() => {
-                  setMenuOpen(false);
-                  setProfileOpen(false);
-                }}
+                onClick={handleLinkClick}
               >
-                {label}
+                {link.label}
               </NavLink>
             ))}
           </nav>
 
-          {/* LANGUAGE */}
+          {/* Language Switcher */}
           <div className="navbar-lang-switcher">
             {languageOptions.map((opt) => (
               <button
@@ -65,20 +71,20 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* PROFILE */}
+          {/* Profile Menu */}
           <div className="navbar-profile-menu">
             <button
               className="navbar-profile-btn"
-              onClick={() => setProfileOpen(!profileOpen)}
+              onClick={() => setIsProfileOpen(!isProfileOpen)}
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
               </svg>
             </button>
 
-            {profileOpen && (
+            {isProfileOpen && (
               <div className="navbar-profile-dropdown">
-                <Link to="/profile" className="navbar-profile-item">
+                <Link to="/profile" className="navbar-profile-item" onClick={handleLinkClick}>
                   {t.navProfile}
                 </Link>
                 <button className="navbar-profile-item">
@@ -88,10 +94,10 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* MOBILE MENU */}
+          {/* Mobile Menu Toggle */}
           <button
             className="navbar-toggle"
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             <span />
             <span />
