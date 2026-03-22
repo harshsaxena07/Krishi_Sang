@@ -6,6 +6,7 @@ from routes.loans import loans_bp
 from routes.ai_routes import ai_bp
 from routes.schemes import schemes_bp
 from routes.tools import tools_bp
+from routes.loan_agent_routes import loan_agent_bp
 
 def create_app():
     app = Flask(__name__)
@@ -18,6 +19,7 @@ def create_app():
     app.register_blueprint(ai_bp, url_prefix="/api")
     app.register_blueprint(schemes_bp, url_prefix="/api")
     app.register_blueprint(tools_bp, url_prefix="/api")
+    app.register_blueprint(loan_agent_bp, url_prefix="/api")
 
     @app.route("/")
     def home():
