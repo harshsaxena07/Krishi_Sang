@@ -1,3 +1,9 @@
+/*
+  Dashboard page for KrishiSangh.
+  Combines multiple sections including schemes, loans, and farmer dashboard data
+  into a single view, with filtering and structured rendering of content.
+*/
+
 /* Dashboard-specific layout */
 .dashboard-page {
   display: flex;

@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 
+// Maximum allowed file size (10MB)
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+// Backend API endpoint for disease detection
 const API_URL = "http://127.0.0.1:5001/api/ai/disease-detection";
 
+// Icon for upload area
 function UploadIcon() {
   return (
     <svg width="38" height="38" viewBox="0 0 24 24" fill="currentColor">
@@ -13,35 +17,42 @@ function UploadIcon() {
 }
 
 export default function ChatWindow() {
+
+  // Access translation text
   const { t } = useLanguage();
 
+  // Reference to hidden file input (used to trigger file picker)
   const fileInputRef = useRef(null);
 
+  // State management for UI behavior
   const [isDragging, setIsDragging] = useState(false);
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState('');
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // clean preview
+  // Cleanup preview URL when component unmounts or image changes
   useEffect(() => {
     return () => {
       if (preview) URL.revokeObjectURL(preview);
     };
   }, [preview]);
 
-  // call backend when image changes
+  // Automatically call backend API when image is selected
   useEffect(() => {
     if (!image) return;
 
     const sendToBackend = async () => {
+
       setLoading(true);
       setResult(null);
 
+      // Prepare form data to send image file
       const formData = new FormData();
       formData.append("file", image);
 
       try {
+        // Send POST request to Flask backend
         const res = await fetch(API_URL, {
           method: "POST",
           body: formData,
@@ -51,10 +62,12 @@ export default function ChatWindow() {
 
         console.log("API RESPONSE:", data); 
 
+        // Handle backend errors
         if (!res.ok) {
-          console.error("Backend Error:", data);
           throw new Error(data.error || "API Error");
         }
+
+        // Store prediction result in state
         setResult({
           disease: data.predicted_disease,
           confidence: data.confidence,
@@ -64,12 +77,15 @@ export default function ChatWindow() {
 
       } catch (err) {
         console.error(err);
+
+        // Show fallback error result
         setResult({
           disease: "Error",
           confidence: "-",
           description: "Unable to process image",
           treatment: "-",
         });
+
       } finally {
         setLoading(false);
       }
@@ -78,9 +94,11 @@ export default function ChatWindow() {
     sendToBackend();
   }, [image]);
 
+  // Validate and process uploaded file
   const handleFile = (file) => {
     if (!file) return;
 
+    // Allow only images and restrict size
     if (!file.type.startsWith('image/') || file.size > MAX_FILE_SIZE) return;
 
     if (preview) URL.revokeObjectURL(preview);
@@ -92,16 +110,19 @@ export default function ChatWindow() {
     setResult(null);
   };
 
+  // Handle file selection from input
   const handleInputChange = (e) => {
     const file = e.target.files && e.target.files[0];
     handleFile(file);
     e.target.value = '';
   };
 
+  // Open file picker manually
   const openFilePicker = () => {
     if (fileInputRef.current) fileInputRef.current.click();
   };
 
+  // Handle drag and drop upload
   const onDrop = (e) => {
     e.preventDefault();
     setIsDragging(false);
@@ -111,8 +132,11 @@ export default function ChatWindow() {
   };
 
   return (
+
+    // Main disease detection UI container
     <section className="disease-detection-shell">
 
+      {/* Header section */}
       <header className="disease-detection-header">
         <span className="detection-badge">{t.detectionBadge}</span>
         <h1>{t.detectionTitle}</h1>
@@ -126,6 +150,7 @@ export default function ChatWindow() {
           <p>{t.uploadCardSubtitle}</p>
         </div>
 
+        {/* If no image selected → show upload UI */}
         {!image ? (
           <div
             className={`detection-drop-zone ${isDragging ? 'dragging' : ''}`}
@@ -145,6 +170,7 @@ export default function ChatWindow() {
               {t.browseFiles}
             </button>
 
+            {/* Hidden file input */}
             <input
               ref={fileInputRef}
               type="file"
@@ -153,7 +179,10 @@ export default function ChatWindow() {
               className="detection-file-input"
             />
           </div>
+
         ) : (
+
+          // If image is uploaded → show preview + result
           <div className="detection-result-wrap">
 
             <div className="detection-preview">

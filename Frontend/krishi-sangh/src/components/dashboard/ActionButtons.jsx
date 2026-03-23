@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 
+// Custom icon for crop upload feature
 function CameraIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -9,6 +10,7 @@ function CameraIcon() {
   );
 }
 
+// Icon for schemes/documents
 function DocumentIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -17,6 +19,7 @@ function DocumentIcon() {
   );
 }
 
+// Icon for loans/bank section
 function BankIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -25,6 +28,7 @@ function BankIcon() {
   );
 }
 
+// Icon for crop advisory (coming soon feature)
 function LeafIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -34,8 +38,11 @@ function LeafIcon() {
 }
 
 export default function ActionButtons() {
+
+  // Access translation keys for multi-language labels
   const { t } = useLanguage();
 
+  // Configuration-driven approach for buttons (clean and scalable)
   const actions = [
     { to: '/crop-detection', labelKey: 'uploadCrop', icon: CameraIcon },
     { to: '/schemes', labelKey: 'govtSchemes', icon: DocumentIcon },
@@ -44,8 +51,14 @@ export default function ActionButtons() {
   ];
 
   return (
+
+    // Container for all action buttons
     <div className="action-buttons">
+
+      {/* Dynamically render buttons using map */}
       {actions.map(({ to, labelKey, icon: Icon, comingSoon }) =>
+
+        // If feature is not ready, show disabled-style button
         comingSoon ? (
           <div
             key={labelKey}
@@ -56,6 +69,8 @@ export default function ActionButtons() {
             <span>{t[labelKey]}</span>
           </div>
         ) : (
+
+          // Otherwise render clickable navigation button
           <Link key={labelKey} to={to} className="action-btn">
             <Icon />
             <span>{t[labelKey]}</span>

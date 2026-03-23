@@ -1,3 +1,9 @@
+/* 
+  Home page styles for KrishiSangh.
+  Handles layout, sections (hero, services, stats, CTA),
+  and overall UI design including grids, spacing, and backgrounds.
+*/
+
 /* Page common */
 .page {
   padding-bottom: var(--space-2xl);

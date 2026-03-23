@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import "../styles/pages/home.css";
 
+// Wrapper to keep all icons visually consistent across cards
 function IconWrapper({ children }) {
   return (
     <span className="home-icon-wrap" aria-hidden="true">
@@ -10,6 +11,7 @@ function IconWrapper({ children }) {
   );
 }
 
+// Custom SVG icons (avoids external icon libraries)
 function FileIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -87,9 +89,13 @@ function CheckIcon() {
   );
 }
 
+// Main homepage component
 export default function Home() {
+
+  // Accessing translation function from global context (for multi-language UI)
   const { t } = useLanguage();
 
+  // Services shown on homepage (drives UI dynamically)
   const services = [
     { title: 'Government Schemes', description: 'Access latest farmer welfare schemes', icon: <FileIcon />, link: '/schemes' },
     { title: 'Bank Loans', description: 'Find suitable agricultural loans', icon: <BankIcon />, link: '/loans' },
@@ -97,6 +103,7 @@ export default function Home() {
     { title: 'Disease Detection', description: 'Identify crop diseases instantly', icon: <ShieldIcon />, link: '/chatbot' },
   ];
 
+  // Highlights/strengths section
   const strengths = [
     { title: 'AI-powered farming tools', icon: <BotIcon /> },
     { title: 'Trusted government data', icon: <FileIcon /> },
@@ -104,12 +111,14 @@ export default function Home() {
     { title: 'Multi-language support', icon: <GlobeIcon /> },
   ];
 
+  // Step-by-step explanation of how platform works
   const steps = [
     { title: 'Enter your data', detail: 'Fill in soil and farm details in simple forms.' },
     { title: 'Get AI recommendations', detail: 'Receive smart suggestions tailored to your farm.' },
     { title: 'Take action', detail: 'Apply insights to improve productivity and reduce risk.' },
   ];
 
+  // Stats section (builds user trust)
   const stats = [
     { value: '10,000+', label: 'Farmers Supported' },
     { value: '500+', label: 'Schemes Listed' },
@@ -117,6 +126,7 @@ export default function Home() {
     { value: '95%', label: 'Satisfaction Rate' },
   ];
 
+  // Testimonials from users (UI content)
   const testimonials = [
     { quote: 'KrishiSangh helped me choose the right crop and increased my yield.', name: 'Ramesh Kumar', location: 'Uttar Pradesh' },
     { quote: 'The loan and scheme details are clear and easy to compare in one place.', name: 'Sunita Devi', location: 'Bihar' },
@@ -126,12 +136,14 @@ export default function Home() {
   return (
     <div className="page home-page home-landing-page">
 
+      {/* Hero section: first impression + navigation */}
       <section className="home-hero">
         <div className="home-hero-content">
           <div className="home-hero-text">
             <h1>KrishiSangh</h1>
             <p>Digital Farming Support System - Empowering Farmers with Smart Technology</p>
 
+            {/* Navigation handled using React Router (no page reload) */}
             <div className="home-hero-actions">
               <Link to="/dashboard" className="btn btn-secondary">
                 {t.homeGoDashboard}
@@ -145,6 +157,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Services rendered dynamically using map */}
       <section className="home-section">
         <div className="home-section-head">
           <h2>Our Services</h2>
@@ -162,6 +175,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Strengths section */}
       <section className="home-section">
         <div className="home-section-head">
           <h2>Why Choose KrishiSangh?</h2>
@@ -177,6 +191,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Step-by-step flow */}
       <section className="home-section">
         <div className="home-section-head">
           <h2>How It Works</h2>
@@ -193,6 +208,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Stats display */}
       <section className="home-stats-section">
         <div className="home-stats-grid">
           {stats.map((stat) => (
@@ -204,6 +220,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Testimonials */}
       <section className="home-section">
         <div className="home-section-head">
           <h2>What Farmers Say</h2>
@@ -220,6 +237,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Final call-to-action */}
       <section className="home-cta-section">
         <div className="home-cta-content">
           <h2>Start Your Smart Farming Journey Today</h2>

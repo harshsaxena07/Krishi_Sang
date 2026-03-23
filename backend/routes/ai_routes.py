@@ -1,11 +1,12 @@
 import sys
 import os
 
+# Add project root to path for module access
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from flask import Blueprint, request, jsonify
-import tensorflow as tf
-import joblib
+import tensorflow as tf #deep learning model
+import joblib #joblib to load ML mdoel
 import numpy as np
 from PIL import Image
 import io
@@ -15,15 +16,19 @@ ai_bp = Blueprint("ai", __name__)
 
 print("Loading models...")
 
+#for the base directory of the project 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+## Define path for models
 disease_model_path = os.path.join(BASE_DIR, "models", "plant_disease_model.keras")
 crop_model_path = os.path.join(BASE_DIR, "models", "crop_recommendation_model.joblib")
 
 print("Disease model path:", disease_model_path)
 print("Crop model path:", crop_model_path)
 
+#deep learning model for disease detection 
 disease_model = tf.keras.models.load_model(disease_model_path)
+#ML models are loaded
 crop_model = joblib.load(crop_model_path)
 
 print("✅ Models loaded successfully")
@@ -37,14 +42,19 @@ def disease_detection():
 
         file = request.files["file"]
 
+        #file converted into rgb
         image = Image.open(io.BytesIO(file.read())).convert("RGB")
         image = image.resize((128, 128))
 
+        #normailization of array
         img_array = np.array(image) / 255.0
         img_array = np.expand_dims(img_array, axis=0)
 
+        #prediction using disease models
         predictions = disease_model.predict(img_array)
+        #index of highest probability
         predicted_index = np.argmax(predictions[0])
+        #get confidence scores
         confidence = float(np.max(predictions[0]) * 100)
 
         return jsonify({

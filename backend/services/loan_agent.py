@@ -7,6 +7,11 @@ from db import get_db_connection
 def fetch_external_loans():
     loans = []
 
+    # COMMON FILTER KEYWORDS (reused for both PIB + SBI)
+    farmer_keywords = ["farmer", "kisan", "agriculture", "crop", "farming", "agri"]
+    loan_keywords = ["loan", "credit", "finance", "scheme"]
+    exclude_keywords = ["education", "student", "startup", "urban"]
+
     # ---------------------------
     # 1. GOVERNMENT (RSS SOURCE)
     # ---------------------------
@@ -22,16 +27,11 @@ def fetch_external_loans():
             title_lower = title.lower()
             summary_lower = summary.lower()
 
-            # ✅ STRICT FARMER + LOAN FILTER
-            farmer_keywords = ["farmer", "kisan", "agriculture", "crop", "farming", "agri"]
-            loan_keywords = ["loan", "credit", "finance", "scheme"]
-
-            exclude_keywords = ["education", "student", "startup", "urban"]
-
-            # skip unwanted
+            # Skip unwanted
             if any(bad in title_lower for bad in exclude_keywords):
                 continue
 
+            # Apply farmer + loan filter
             if (
                 any(fk in title_lower or fk in summary_lower for fk in farmer_keywords)
                 and
@@ -40,18 +40,13 @@ def fetch_external_loans():
                 loans.append({
                     "name": title,
                     "name_hi": title,
-
                     "bank": "Government",
-
                     "purpose": summary[:200],
                     "purpose_hi": summary[:200],
-
                     "eligibility": "Check official website",
                     "eligibility_hi": "आधिकारिक वेबसाइट देखें",
-
                     "documents": ["Aadhaar", "Bank Account"],
                     "documents_hi": ["आधार", "बैंक खाता"],
-
                     "official_website": link,
                     "image": "/images/default-loan.jpg"
                 })
@@ -74,24 +69,31 @@ def fetch_external_loans():
                 name = h.get_text(strip=True)
 
                 if len(name) > 5:
-                    loans.append({
-                        "name": f"SBI {name}",
-                        "name_hi": f"एसबीआई {name}",
+                    name_lower = name.lower()
 
-                        "bank": "SBI",
+                    # ❗ APPLY SAME FILTER HERE
+                    if any(bad in name_lower for bad in exclude_keywords):
+                        continue
 
-                        "purpose": "Agriculture loan support",
-                        "purpose_hi": "कृषि ऋण सहायता",
+                    if (
+                        any(fk in name_lower for fk in farmer_keywords)
+                        and
+                        any(lk in name_lower for lk in loan_keywords)
+                    ):
+                        loans.append({
+                            "name": f"SBI {name}",
+                            "name_hi": f"एसबीआई {name}",
+                            "bank": "SBI",
+                            "purpose": "Agriculture loan support",
+                            "purpose_hi": "कृषि ऋण सहायता",
+                            "eligibility": "Farmers with valid land documents",
+                            "eligibility_hi": "वैध भूमि दस्तावेज़ वाले किसान",
+                            "documents": ["Aadhaar", "Land Proof"],
+                            "documents_hi": ["आधार", "भूमि प्रमाण"],
+                            "official_website": sbi_url,
+                            "image": "/images/sbi.jpg"
+                        })
 
-                        "eligibility": "Farmers with valid land documents",
-                        "eligibility_hi": "वैध भूमि दस्तावेज़ वाले किसान",
-
-                        "documents": ["Aadhaar", "Land Proof"],
-                        "documents_hi": ["आधार", "भूमि प्रमाण"],
-
-                        "official_website": sbi_url,
-                        "image": "/images/sbi.jpg"
-                    })
         else:
             print("SBI request failed:", response.status_code)
 
@@ -99,7 +101,7 @@ def fetch_external_loans():
         print("SBI scraping failed:", e)
 
     # ---------------------------
-    # 3. CLEAN (NO FALLBACK)
+    # 3. CLEAN
     # ---------------------------
     if len(loans) == 0:
         print("No farmer-related loan data found")

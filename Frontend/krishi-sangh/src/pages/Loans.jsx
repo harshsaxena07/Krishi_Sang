@@ -3,18 +3,24 @@ import { useLanguage } from '../context/LanguageContext';
 import LoanCard from '../components/loans/LoanCard';
 import "../styles/pages/loans.css";
 
+// Backend API endpoint for loans
 const API_URL = "http://127.0.0.1:5001/api/loans";
 
+// Filter options for banks
 const FILTERS = ['All Banks', 'SBI', 'HDFC', 'ICICI', 'PNB'];
 
 export default function Loans() {
+
+  // Access selected language
   const { language } = useLanguage();
 
+  // State for filter, data, loading, and warning
   const [filter, setFilter] = useState('All Banks');
   const [loans, setLoans] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [warning, setWarning] = useState(""); // FIXED
+  const [warning, setWarning] = useState("");
 
+  // Language-based UI content (manual i18n handling)
   const copy = language === 'hi'
     ? {
         title: 'बैंक ऋण योजनाएं',
@@ -43,9 +49,12 @@ export default function Loans() {
         footer: 'KrishiSangh Farmer Finance Support',
       };
 
+  // Fetch loan data with caching
   useEffect(() => {
     const fetchLoans = async () => {
       try {
+
+        // Load cached data first for faster UI
         const cached = localStorage.getItem("loans_cache");
 
         if (cached) {
@@ -54,6 +63,7 @@ export default function Loans() {
           setLoading(false);
         }
 
+        // Fetch fresh data from backend
         const res = await fetch(API_URL);
 
         if (!res.ok) {
@@ -62,6 +72,7 @@ export default function Loans() {
 
         const response = await res.json();
 
+        // Show warning if backend is using fallback data
         if (response.source === "local") {
           setWarning(response.message);
         }
@@ -70,6 +81,7 @@ export default function Loans() {
 
         setLoans(freshData);
 
+        // Update cache
         localStorage.setItem("loans_cache", JSON.stringify({
           data: freshData,
           timestamp: new Date().getTime()
@@ -77,7 +89,10 @@ export default function Loans() {
 
       } catch (error) {
         console.error("Error fetching loans:", error);
+
+        // Show error message
         setWarning("Unable to load data");
+
       } finally {
         setLoading(false);
       }
@@ -86,18 +101,24 @@ export default function Loans() {
     fetchLoans();
   }, []);
 
+  // Filter loans based on selected bank (optimized using useMemo)
   const filteredLoans = useMemo(() => {
     if (filter === 'All Banks') return loans;
     return loans.filter((loan) => loan.bank === filter);
   }, [filter, loans]);
 
   return (
+
+    // Main loans page container
     <div className="page loans-page loans-page-wide">
+
+      {/* Page header */}
       <header className="loans-page-header">
         <h1 className="loans-page-title">{copy.title}</h1>
         <p className="loans-page-subtitle">{copy.description}</p>
       </header>
 
+      {/* Filter buttons */}
       <div className="loans-filters">
         {FILTERS.map((bank) => (
           <button
@@ -110,16 +131,19 @@ export default function Loans() {
         ))}
       </div>
 
-      {/* Warning message */}
+      {/* Warning message (fallback or error) */}
       {warning && (
         <p style={{ textAlign: "center", color: "orange" }}>
           {warning}
         </p>
       )}
 
+      {/* Loading state */}
       {loading ? (
         <p style={{ textAlign: "center" }}>Loading loans...</p>
       ) : (
+
+        // Render loans dynamically using LoanCard
         <div className="loans-detail-grid">
           {filteredLoans.map((loan) => (
             <LoanCard key={loan.id} loan={loan} />
@@ -127,9 +151,11 @@ export default function Loans() {
         </div>
       )}
 
+      {/* Footer section */}
       <footer className="loans-page-footer">
         <p>{copy.footer}</p>
       </footer>
+
     </div>
   );
 }

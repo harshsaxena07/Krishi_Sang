@@ -24,9 +24,11 @@ def get_tools():
 
         cur.execute("SELECT * FROM tools;")
 
+        # Extract column names from query result and fetch all rows from database
         columns = [desc[0] for desc in cur.description]
         rows = cur.fetchall()
 
+        # Convert rows into list of dictionaries
         tools = [dict(zip(columns, row)) for row in rows]
 
         cur.close()

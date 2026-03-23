@@ -160,7 +160,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 10px;
-  margin-top: auto; /* push buttons to bottom */
+  margin-top: auto;
 }
 
 /* IMAGE */
