@@ -1,0 +1,324 @@
+﻿/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary-green: #22c55e;
+  --dark-green-bg: #064e3b;
+  --medium-green: #14532d;
+  --light-green-text: #f0fdf4;
+  --accent-leaf: #4ade80;
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --input-bg: rgba(0, 0, 0, 0.2);
+}
+
+/* PAGE WRAPPER */
+.add-tool-page {
+  width: 100%;
+  min-height: 100vh;
+  /* Applying large border radius to the top to match dashboard style */
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  background: linear-gradient(135deg, #14532d 0%, #064e3b 100%);
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* Ensure the rounded corners are visible against the header */
+  margin-top: -20px; 
+  position: relative;
+  z-index: 1;
+}
+
+/* SHELL */
+.add-tool-shell {
+  width: 100%;
+  max-width: 750px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* HEADER */
+.add-tool-header {
+  text-align: center;
+}
+
+.add-tool-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--primary-green);
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.add-tool-header h1 {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.add-tool-header p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* CARD */
+.add-tool-card {
+  width: 100%;
+  padding: 40px;
+  border-radius: 24px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.add-tool-card-head {
+  margin-bottom: 30px;
+}
+
+.add-tool-card-head h2 {
+  color: white;
+  border-left: 4px solid var(--primary-green);
+  padding-left: 15px;
+}
+
+/* GRID SYSTEM */
+.add-tool-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.add-tool-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.add-tool-field span {
+  color: var(--light-green-text);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.full {
+  grid-column: span 2;
+}
+
+/* INPUT WRAP & FIELD FIXES */
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrap input,
+.input-wrap select,
+.input-wrap textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--input-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Fix for the Price/Currency text overlapping or falling out */
+.input-wrap small {
+  position: absolute;
+  right: 15px;
+  color: var(--accent-leaf);
+  font-weight: 700;
+  pointer-events: none;
+  font-size: 0.85rem;
+}
+
+/* Add padding to the right of price input so text doesn't hide behind the ₹ tag */
+input[name="price"] {
+  padding-right: 60px !important;
+}
+
+/* IMAGE PREVIEW STYLING */
+/* 1. Container for the whole section */
+.image-upload-container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* 2. Hide the actual ugly file input */
+#tool-image-input {
+  display: none;
+}
+
+/* 3. The Custom "Drop Zone" Label */
+.upload-label {
+  width: 100%;
+  max-width: 450px;
+  padding: 40px 20px;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.upload-label:hover {
+  background: rgba(34, 197, 94, 0.05);
+  border-color: #22c55e;
+}
+
+/* 4. Adding the Icon and Text (Using CSS pseudo-elements) */
+.upload-label::before {
+  content: '⬇️'; /* You can replace this with an SVG icon in JSX later */
+  font-size: 32px;
+  margin-bottom: 15px;
+  background: white;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.upload-label::after {
+  content: 'Click to upload image or drag and drop';
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #f0fdf4;
+  text-align: center;
+}
+
+/* 5. Styling the 'Browse Files' button appearance inside the label */
+.custom-browse-text {
+  margin-top: 15px;
+  padding: 10px 25px;
+  background: #22c55e;
+  color: white;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 6. Fix for Image Preview to stay within the card */
+.image-preview-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-top: 15px;
+  width: 100%; /* Allows it to take up space in the container */
+  max-width: 500px; /* Limits the width so it doesn't get too huge */
+}
+
+.image-preview {
+  width: 100%; 
+  height: 250px; /* Fixed height to force horizontal shape */
+  aspect-ratio: 16 / 9; /* Professional landscape ratio */
+  object-fit: cover; /* Ensures the image fills the area without stretching */
+  border-radius: 15px;
+  border: 3px solid #22c55e;
+  display: block;
+}
+
+.remove-img-btn {
+  position: absolute;
+  top: -10px;  /* Adjusts the vertical position */
+  right: -10px; /* Adjusts the horizontal position */
+  width: 28px;
+  height: 28px;
+  background-color: #ef4444; /* Alert Red */
+  color: white;
+  border: 2px solid #064e3b; /* Matches your dark green page background */
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  z-index: 10;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.remove-img-btn:hover {
+  background-color: #b91c1c;
+  transform: scale(1.1);
+}
+
+
+
+/* SUBMIT BUTTON */
+.add-tool-submit {
+  width: 100%;
+  padding: 16px;
+  margin-top: 30px;
+  border-radius: 14px;
+  border: none;
+  background: var(--primary-green);
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.add-tool-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3);
+}
+
+.success-msg {
+  background: #e6f9ed;
+  color: #1b5e20;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.error-msg {
+  background: #fdecea;
+  color: #b71c1c;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.add-tool-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 768px) {
+  .add-tool-grid {
+    grid-template-columns: 1fr;
+  }
+  .full {
+    grid-column: span 1;
+  }
+  .add-tool-page {
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+  }
+}

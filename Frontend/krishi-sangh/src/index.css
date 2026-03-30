@@ -4,3 +4,168 @@
 @import url('./styles/layout.css');
 @import url('./styles/dashboard.css');
 @import url('./styles/pages.css');
+
+/* 🌿 Premium Auth Background */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+
+  /* 🌈 Animated gradient */
+  background: linear-gradient(-45deg, #e8f5e9, #c8e6c9, #a5d6a7, #e8f5e9);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
+
+/* 🌊 Gradient Animation */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 📦 Container */
+.auth-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: center;
+  max-width: 1050px;
+  width: 100%;
+  border-radius: 24px;
+  overflow: hidden;
+
+  /* ✨ Glass effect */
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+}
+
+/* 🌱 LEFT PANEL */
+.auth-left {
+  flex: 1;
+  min-width: 300px;
+  background: linear-gradient(135deg, #2e7d32, #66bb6a);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 40px;
+  position: relative;
+}
+
+/* 🌟 Subtle overlay */
+.auth-left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("https://www.transparenttextures.com/patterns/cubes.png");
+  opacity: 0.08;
+}
+
+/* 🖼 Logo */
+.auth-logo {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin-bottom: 25px;
+  background: white;
+  padding: 15px;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  z-index: 1;
+}
+
+/* 🟢 Title */
+.auth-title {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  z-index: 1;
+}
+
+/* 🌾 Subtitle */
+.auth-subtitle {
+  font-size: 15px;
+  color: #e8f5e9;
+  line-height: 1.6;
+  max-width: 260px;
+  z-index: 1;
+}
+
+/* 🔐 RIGHT PANEL */
+.auth-right {
+  flex: 1;
+  min-width: 0;
+  padding: 50px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🔥 Clerk Card Premium */
+.cl-card {
+  width: 100% !important;
+  max-width: 420px !important;
+  border-radius: 18px !important;
+
+  /* ✨ Glassmorphism */
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.85) !important;
+
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15) !important;
+}
+
+/* 🔥 Button Enhancement */
+.cl-formButtonPrimary {
+  background: linear-gradient(135deg, #2e7d32, #43a047) !important;
+  border-radius: 10px !important;
+  transition: all 0.3s ease !important;
+}
+
+.cl-formButtonPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(46,125,50,0.3);
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+
+  .auth-container {
+    flex-direction: column;
+    border-radius: 18px;
+    margin-bottom: 40px;
+  }
+
+  .auth-left {
+    padding: 30px 20px;
+  }
+
+  .auth-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .auth-title {
+    font-size: 22px;
+  }
+
+  .auth-subtitle {
+    font-size: 13px;
+  }
+
+  .auth-right {
+    padding: 20px 10px 30px;
+  }
+}
+
+/* 🔥 Safety */
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}

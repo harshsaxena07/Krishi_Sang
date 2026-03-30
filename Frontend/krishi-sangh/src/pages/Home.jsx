@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import "../styles/pages/home.css";
 
-// Wrapper to keep all icons visually consistent across cards
 function IconWrapper({ children }) {
   return (
     <span className="home-icon-wrap" aria-hidden="true">
@@ -11,7 +10,7 @@ function IconWrapper({ children }) {
   );
 }
 
-// Custom SVG icons (avoids external icon libraries)
+// ICONS (UNCHANGED)
 function FileIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -89,79 +88,109 @@ function CheckIcon() {
   );
 }
 
-// Main homepage component
 export default function Home() {
 
-  // Accessing translation function from global context (for multi-language UI)
-  const { t } = useLanguage();
+  // ✅ ONLY CHANGE HERE
+  const { t, language } = useLanguage();
 
-  // Services shown on homepage (drives UI dynamically)
+  // SERVICES (UPDATED ONLY TEXT)
   const services = [
-    { title: 'Government Schemes', description: 'Access latest farmer welfare schemes', icon: <FileIcon />, link: '/schemes' },
-    { title: 'Bank Loans', description: 'Find suitable agricultural loans', icon: <BankIcon />, link: '/loans' },
-    { title: 'Crop Recommendation', description: 'AI-based crop suggestions', icon: <SproutIcon />, link: '/crop-detection' },
-    { title: 'Disease Detection', description: 'Identify crop diseases instantly', icon: <ShieldIcon />, link: '/chatbot' },
+    {
+      title: language === "hi" ? "सरकारी योजनाएँ" : "Government Schemes",
+      description: language === "hi" ? "किसानों के लिए नवीनतम योजनाएँ देखें" : "Access latest farmer welfare schemes",
+      icon: <FileIcon />, link: '/schemes'
+    },
+    {
+      title: language === "hi" ? "बैंक लोन" : "Bank Loans",
+      description: language === "hi" ? "कृषि ऋण विकल्प खोजें" : "Find suitable agricultural loans",
+      icon: <BankIcon />, link: '/loans'
+    },
+    {
+      title: language === "hi" ? "फसल सुझाव" : "Crop Recommendation",
+      description: language === "hi" ? "AI आधारित फसल सुझाव" : "AI-based crop suggestions",
+      icon: <SproutIcon />, link: '/crop-detection'
+    },
+    {
+      title: language === "hi" ? "रोग पहचान" : "Disease Detection",
+      description: language === "hi" ? "फसल रोग तुरंत पहचानें" : "Identify crop diseases instantly",
+      icon: <ShieldIcon />, link: '/chatbot'
+    },
   ];
 
-  // Highlights/strengths section
   const strengths = [
-    { title: 'AI-powered farming tools', icon: <BotIcon /> },
-    { title: 'Trusted government data', icon: <FileIcon /> },
-    { title: 'Easy to use platform', icon: <CheckIcon /> },
-    { title: 'Multi-language support', icon: <GlobeIcon /> },
+    { title: language === "hi" ? "AI आधारित उपकरण" : "AI-powered farming tools", icon: <BotIcon /> },
+    { title: language === "hi" ? "सरकारी डेटा" : "Trusted government data", icon: <FileIcon /> },
+    { title: language === "hi" ? "आसान उपयोग" : "Easy to use platform", icon: <CheckIcon /> },
+    { title: language === "hi" ? "बहुभाषी समर्थन" : "Multi-language support", icon: <GlobeIcon /> },
   ];
 
-  // Step-by-step explanation of how platform works
   const steps = [
-    { title: 'Enter your data', detail: 'Fill in soil and farm details in simple forms.' },
-    { title: 'Get AI recommendations', detail: 'Receive smart suggestions tailored to your farm.' },
-    { title: 'Take action', detail: 'Apply insights to improve productivity and reduce risk.' },
+    {
+      title: language === "hi" ? "अपना डेटा दर्ज करें" : "Enter your data",
+      detail: language === "hi" ? "मिट्टी और खेत की जानकारी भरें" : "Fill in soil and farm details in simple forms."
+    },
+    {
+      title: language === "hi" ? "AI सुझाव प्राप्त करें" : "Get AI recommendations",
+      detail: language === "hi" ? "स्मार्ट सुझाव प्राप्त करें" : "Receive smart suggestions tailored to your farm."
+    },
+    {
+      title: language === "hi" ? "कार्रवाई करें" : "Take action",
+      detail: language === "hi" ? "उत्पादन बढ़ाएँ" : "Apply insights to improve productivity and reduce risk."
+    },
   ];
 
-  // Stats section (builds user trust)
   const stats = [
-    { value: '10,000+', label: 'Farmers Supported' },
-    { value: '500+', label: 'Schemes Listed' },
-    { value: '200+', label: 'Tools Available' },
-    { value: '95%', label: 'Satisfaction Rate' },
+    { value: '10,000+', label: language === "hi" ? "किसान समर्थित" : "Farmers Supported" },
+    { value: '500+', label: language === "hi" ? "योजनाएँ" : "Schemes Listed" },
+    { value: '200+', label: language === "hi" ? "उपकरण" : "Tools Available" },
+    { value: '95%', label: language === "hi" ? "संतुष्टि" : "Satisfaction Rate" },
   ];
 
-  // Testimonials from users (UI content)
   const testimonials = [
-    { quote: 'KrishiSangh helped me choose the right crop and increased my yield.', name: 'Ramesh Kumar', location: 'Uttar Pradesh' },
-    { quote: 'The loan and scheme details are clear and easy to compare in one place.', name: 'Sunita Devi', location: 'Bihar' },
-    { quote: 'I now make faster decisions because recommendations are simple and practical.', name: 'Mahesh Patil', location: 'Maharashtra' },
+    {
+      quote: language === "hi" ? "इस प्लेटफॉर्म से मेरी फसल बढ़ी" : "KrishiSangh helped me choose the right crop and increased my yield.",
+      name: 'Ramesh Kumar', location: 'Uttar Pradesh'
+    },
+    {
+      quote: language === "hi" ? "बहुत उपयोगी जानकारी मिली" : "The loan and scheme details are clear and easy to compare in one place.",
+      name: 'Sunita Devi', location: 'Bihar'
+    },
+    {
+      quote: language === "hi" ? "निर्णय लेना आसान हो गया" : "I now make faster decisions because recommendations are simple and practical.",
+      name: 'Mahesh Patil', location: 'Maharashtra'
+    },
   ];
 
   return (
     <div className="page home-page home-landing-page">
 
-      {/* Hero section: first impression + navigation */}
       <section className="home-hero">
         <div className="home-hero-content">
           <div className="home-hero-text">
             <h1>KrishiSangh</h1>
-            <p>Digital Farming Support System - Empowering Farmers with Smart Technology</p>
+            <p>
+              {language === "hi"
+                ? "डिजिटल खेती समर्थन प्रणाली"
+                : "Digital Farming Support System - Empowering Farmers with Smart Technology"}
+            </p>
 
-            {/* Navigation handled using React Router (no page reload) */}
             <div className="home-hero-actions">
               <Link to="/dashboard" className="btn btn-secondary">
                 {t.homeGoDashboard}
               </Link>
 
               <Link to="/schemes" className="btn btn-outline home-hero-outline-btn">
-                Explore Services
+                {language === "hi" ? "सेवाएं देखें" : "Explore Services"}
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services rendered dynamically using map */}
       <section className="home-section">
         <div className="home-section-head">
-          <h2>Our Services</h2>
-          <p>Everything a farmer needs to make better, faster, and safer decisions.</p>
+          <h2>{language === "hi" ? "हमारी सेवाएं" : "Our Services"}</h2>
+          <p>{language === "hi" ? "किसानों के लिए सभी सुविधाएं" : "Everything a farmer needs to make better, faster, and safer decisions."}</p>
         </div>
 
         <div className="home-services-grid">
@@ -175,10 +204,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Strengths section */}
       <section className="home-section">
         <div className="home-section-head">
-          <h2>Why Choose KrishiSangh?</h2>
+          <h2>{language === "hi" ? "क्यों चुनें?" : "Why Choose KrishiSangh?"}</h2>
         </div>
 
         <div className="home-why-grid">
@@ -191,10 +219,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Step-by-step flow */}
       <section className="home-section">
         <div className="home-section-head">
-          <h2>How It Works</h2>
+          <h2>{language === "hi" ? "कैसे काम करता है" : "How It Works"}</h2>
         </div>
 
         <div className="home-steps-grid">
@@ -208,7 +235,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats display */}
       <section className="home-stats-section">
         <div className="home-stats-grid">
           {stats.map((stat) => (
@@ -220,10 +246,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
       <section className="home-section">
         <div className="home-section-head">
-          <h2>What Farmers Say</h2>
+          <h2>{language === "hi" ? "किसान क्या कहते हैं" : "What Farmers Say"}</h2>
         </div>
 
         <div className="home-testimonial-grid">
@@ -237,10 +262,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Final call-to-action */}
       <section className="home-cta-section">
         <div className="home-cta-content">
-          <h2>Start Your Smart Farming Journey Today</h2>
+          <h2>
+            {language === "hi"
+              ? "आज ही शुरुआत करें"
+              : "Start Your Smart Farming Journey Today"}
+          </h2>
 
           <Link to="/dashboard" className="btn btn-secondary home-cta-btn">
             {t.homeGoDashboard}

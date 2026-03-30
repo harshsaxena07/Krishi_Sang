@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
-
+import MainTopBar from "../layout/MainTopBar";
 // Maximum allowed file size (10MB)
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
@@ -135,7 +135,7 @@ export default function ChatWindow() {
 
     // Main disease detection UI container
     <section className="disease-detection-shell">
-
+      <MainTopBar/>
       {/* Header section */}
       <header className="disease-detection-header">
         <span className="detection-badge">{t.detectionBadge}</span>

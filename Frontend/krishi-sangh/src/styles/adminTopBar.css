@@ -1,0 +1,39 @@
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* LEFT BUTTON */
+.back-btn {
+  border: 2px solid #2e7d32;
+  background: transparent;
+  color: #2e7d32;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.back-btn:hover {
+  background: #2e7d32;
+  color: white;
+}
+
+/* RIGHT BUTTON */
+.add-btn-top {
+  background: #2e7d32;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.add-btn-top:hover {
+  background: #1b5e20;
+}

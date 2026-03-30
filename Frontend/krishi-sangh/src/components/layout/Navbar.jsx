@@ -3,6 +3,9 @@ import { Link, NavLink } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 import { languageOptions } from '../../translations';
 
+// ✅ Clerk import
+import { useClerk } from "@clerk/clerk-react";
+
 export default function Navbar() {
   // state for mobile menu
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,6 +14,9 @@ export default function Navbar() {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   const { language, setLanguage, t } = useLanguage();
+
+  // ✅ Clerk logout function
+  const { signOut } = useClerk();
 
   // navigation links
   const navLinks = [
@@ -26,6 +32,12 @@ export default function Navbar() {
   // handle link click (close menus)
   const handleLinkClick = () => {
     setIsMenuOpen(false);
+    setIsProfileOpen(false);
+  };
+
+  // ✅ handle logout
+  const handleLogout = async () => {
+    await signOut();
     setIsProfileOpen(false);
   };
 
@@ -84,10 +96,19 @@ export default function Navbar() {
 
             {isProfileOpen && (
               <div className="navbar-profile-dropdown">
-                <Link to="/profile" className="navbar-profile-item" onClick={handleLinkClick}>
+                <Link
+                  to="/profile"
+                  className="navbar-profile-item"
+                  onClick={handleLinkClick}
+                >
                   {t.navProfile}
                 </Link>
-                <button className="navbar-profile-item">
+
+                {/* ✅ Working Logout */}
+                <button
+                  className="navbar-profile-item"
+                  onClick={handleLogout}
+                >
                   {t.navLogout}
                 </button>
               </div>

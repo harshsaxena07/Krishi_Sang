@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import "../styles/pages/crop.css";
+import MainTopBar from "../components/layout/MainTopBar";
 
 // Initial form state for soil parameters
 const INITIAL_FORM = {
@@ -95,7 +96,7 @@ export default function CropDetection() {
     <div className="page crop-recommendation-page">
 
       <section className="crop-recommendation-shell">
-
+        <MainTopBar />
         {/* Page header */}
         <header className="crop-recommendation-header">
           <span className="crop-reco-badge">{t.cropRecoBadge}</span>

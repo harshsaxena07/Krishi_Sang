@@ -12,16 +12,14 @@ const CATEGORY_FILTERS = ['all', 'Tractors', 'Harvesters', 'Rotavators'];
 
 export default function ToolRental() {
 
-  // Access selected language
   const { language } = useLanguage();
 
-  // State for filter, data, loading, and warning
   const [activeCategory, setActiveCategory] = useState('all');
   const [tools, setTools] = useState([]);
   const [loading, setLoading] = useState(true);
   const [warning, setWarning] = useState("");
 
-  // Language-based UI labels
+  //FIXED: added addBtn
   const labels = language === 'hi'
     ? {
         back: 'डैशबोर्ड पर वापस',
@@ -34,6 +32,7 @@ export default function ToolRental() {
           Harvesters: 'हार्वेस्टर',
           Rotavators: 'रोटावेटर',
         },
+        addBtn: '+ उपकरण जोड़ें'
       }
     : {
         back: 'Back to Dashboard',
@@ -46,14 +45,12 @@ export default function ToolRental() {
           Harvesters: 'Harvesters',
           Rotavators: 'Rotavators',
         },
+        addBtn: '+ Add Your Tool'
       };
 
-  // Fetch tools from backend with caching
   useEffect(() => {
     const fetchTools = async () => {
       try {
-
-        // Load cached data first
         const cached = localStorage.getItem("tools_cache");
 
         if (cached) {
@@ -62,7 +59,6 @@ export default function ToolRental() {
           setLoading(false);
         }
 
-        // Fetch fresh data
         const res = await fetch(API_URL);
 
         if (!res.ok) {
@@ -71,7 +67,6 @@ export default function ToolRental() {
 
         const response = await res.json();
 
-        // Show warning if backend fallback is used
         if (response.source === "local") {
           setWarning(response.message);
         }
@@ -80,7 +75,6 @@ export default function ToolRental() {
 
         setTools(freshData);
 
-        // Update cache
         localStorage.setItem("tools_cache", JSON.stringify({
           data: freshData,
           timestamp: new Date().getTime()
@@ -88,10 +82,8 @@ export default function ToolRental() {
 
       } catch (error) {
         console.error("Error fetching tools:", error);
-
         setTools([]);
         setWarning("Unable to load data");
-
       } finally {
         setLoading(false);
       }
@@ -100,7 +92,6 @@ export default function ToolRental() {
     fetchTools();
   }, []);
 
-  // Filter tools based on selected category
   const filteredTools = useMemo(() => {
     if (activeCategory === 'all') return tools;
     return tools.filter((tool) => tool.type === activeCategory);
@@ -108,13 +99,23 @@ export default function ToolRental() {
 
   return (
 
-    // Main tool rental page container
     <div className="page tool-rental-page tool-marketplace-page">
 
-      {/* Navigation back to dashboard */}
-      <Link to="/dashboard" className="tool-marketplace-back btn btn-outline">
-        {labels.back}
-      </Link>
+      {/* FIXED HEADER ROW */}
+      <div className="tool-header-row">
+
+        <Link to="/dashboard" className="tool-marketplace-back btn btn-outline">
+          {labels.back}
+        </Link>
+
+        <button
+          className="add-tool-btn"
+          onClick={() => window.location.href = "/add-tool"}
+        >
+          {labels.addBtn}
+        </button>
+
+      </div>
 
       {/* Page header */}
       <header className="tool-marketplace-header">
@@ -122,7 +123,7 @@ export default function ToolRental() {
         <p className="page-intro">{labels.description}</p>
       </header>
 
-      {/* Category filter buttons */}
+      {/* Filters */}
       <div className="schemes-filters tool-marketplace-filters">
         {CATEGORY_FILTERS.map((category) => (
           <button
@@ -136,19 +137,17 @@ export default function ToolRental() {
         ))}
       </div>
 
-      {/* Warning message */}
+      {/* Warning */}
       {warning && (
         <p style={{ textAlign: "center", color: "orange" }}>
           {warning}
         </p>
       )}
 
-      {/* Loading state */}
+      {/* Loading */}
       {loading ? (
         <p style={{ textAlign: "center" }}>Loading tools...</p>
       ) : (
-
-        // Render tool cards dynamically
         <div className="tool-marketplace-list">
           {filteredTools.map((tool) => (
             <ToolCard key={tool.id} tool={tool} />

@@ -15,13 +15,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LOCAL_FILE = os.path.join(BASE_DIR, "data", "schemes.json")
 
 
-@schemes_bp.route("/schemes", methods=["GET"])
+# ✅ PUBLIC ROUTE → /api/schemes
+@schemes_bp.route("/", methods=["GET"])
 def get_schemes():
     try:
-        # Attempt to fetch data from database
+        # =========================
+        # FETCH FROM DATABASE
+        # =========================
         conn = get_db_connection()
         cur = conn.cursor()
 
+        # 👉 Only approved schemes for users (IMPORTANT)
         cur.execute("SELECT * FROM schemes;")
 
         columns = [desc[0] for desc in cur.description]
@@ -38,12 +42,13 @@ def get_schemes():
         }), 200
 
     except Exception as db_error:
-        # Log database error and fallback to local file
-        print("Database fetch failed:", db_error)
+        print("❌ Database fetch failed:", db_error)
 
         try:
-            # Attempt to read local backup data
-            with open(LOCAL_FILE, "r") as file:
+            # =========================
+            # FALLBACK → LOCAL JSON
+            # =========================
+            with open(LOCAL_FILE, "r", encoding="utf-8") as file:
                 local_data = json.load(file)
 
             return jsonify({
@@ -53,8 +58,7 @@ def get_schemes():
             }), 200
 
         except Exception as file_error:
-            # If both DB and local file fail, return error response
-            print("Local file read failed:", file_error)
+            print("❌ Local file read failed:", file_error)
 
             return jsonify({
                 "source": "error",

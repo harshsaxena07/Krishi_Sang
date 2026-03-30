@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import LoanCard from '../components/loans/LoanCard';
 import "../styles/pages/loans.css";
+import MainTopBar from "../components/layout/MainTopBar";
 
 // Backend API endpoint for loans
 const API_URL = "http://127.0.0.1:5001/api/loans";
@@ -111,7 +112,7 @@ export default function Loans() {
 
     // Main loans page container
     <div className="page loans-page loans-page-wide">
-
+      <MainTopBar/>
       {/* Page header */}
       <header className="loans-page-header">
         <h1 className="loans-page-title">{copy.title}</h1>

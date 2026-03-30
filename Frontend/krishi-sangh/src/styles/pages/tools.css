@@ -1,3 +1,36 @@
+/* 🔝 Top Header Row */
+.tool-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* 🔘 Premium Add Tool Button */
+.add-tool-btn {
+  background: linear-gradient(135deg, #2e7d32, #43a047);
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-tool-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(46,125,50,0.3);
+}
+
+/* 📱 Mobile */
+@media (max-width: 768px) {
+  .tool-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
 
 /* Tool rental marketplace */
 .tool-marketplace-page {

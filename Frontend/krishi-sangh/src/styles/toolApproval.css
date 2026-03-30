@@ -1,0 +1,249 @@
+.tool-page {
+  padding: 32px;
+  color: #222;
+}
+
+/* ================= HEADER ================= */
+.tool-header {
+  margin-bottom: 28px;
+}
+
+.tool-header h1 {
+  margin: 0 0 8px;
+  color: #1b5e20;
+  font-size: 32px;
+}
+
+.tool-header p {
+  margin: 0;
+  color: #666;
+}
+
+/* ================= GRID FIX ================= */
+.tool-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center; /* 🔥 CENTER CARDS */
+}
+
+/* ================= CARD ================= */
+.tool-card {
+  width: 340px; /* 🔥 FIXED CARD WIDTH */
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(27, 94, 32, 0.12);
+  overflow: hidden;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.tool-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(27, 94, 32, 0.18);
+}
+
+/* ================= IMAGE ================= */
+.tool-image {
+  width: 100%;
+  height: 220px; /* 🔥 BIGGER IMAGE */
+  object-fit: cover;
+  background: #e8f5e9;
+}
+
+/* ================= CONTENT ================= */
+.tool-content {
+  padding: 18px;
+  flex: 1;
+}
+
+.tool-content h3 {
+  margin: 0 0 8px;
+  color: #2e7d32;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.tool-content p {
+  margin: 0 0 10px;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ================= ACTION BUTTONS ================= */
+.tool-actions {
+  padding: 0 18px 18px;
+  display: flex;
+  gap: 12px;
+}
+
+.approve-btn,
+.reject-btn {
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.approve-btn {
+  background: #2e7d32;
+  color: #ffffff;
+}
+
+.approve-btn:hover {
+  background: #1b5e20;
+  transform: translateY(-1px);
+}
+
+.reject-btn {
+  background: #e8f5e9;
+  color: #222;
+  border: 1px solid #66bb6a;
+}
+
+.reject-btn:hover {
+  background: #d6ecd8;
+  transform: translateY(-1px);
+}
+
+.approve-btn:disabled,
+.reject-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .tool-card {
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
+/* ===== TOOL HEADER ===== */
+
+.tool-header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #e8f5e9, #f1f8f4);
+  padding: 25px 30px;
+  margin: 20px auto;
+  border-radius: 14px;
+  max-width: 1100px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  flex-wrap: wrap;
+}
+
+.tool-header-text h1 {
+  font-size: 26px;
+  color: #1b5e20;
+  margin-bottom: 5px;
+}
+
+.tool-header-text p {
+  font-size: 14px;
+  color: #4e6e5d;
+}
+
+/* STATS SAME AS LOAN */
+.tool-header-stats {
+  display: flex;
+  gap: 15px;
+}
+
+.stat-box {
+  background: #fff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  text-align: center;
+  min-width: 120px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+}
+
+.stat-number {
+  display: block;
+  font-size: 20px;
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #777;
+}
+
+/* ===== CENTER CONTAINER ===== */
+
+.tool-container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* ===== GRID ===== */
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+/* ===== CARD ===== */
+
+.tool-card {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+  transition: 0.3s;
+}
+
+.tool-card:hover {
+  transform: translateY(-5px);
+}
+
+.tool-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.tool-content {
+  padding: 15px;
+}
+
+.tool-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+/* ===== LOADER & EMPTY ===== */
+
+.loader,
+.empty-state {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  .tool-header-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tool-header-stats {
+    margin-top: 15px;
+    width: 100%;
+    justify-content: space-between;
+  }
+}

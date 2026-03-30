@@ -4,21 +4,21 @@ import { Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from "./Footer";
 
-export default function Layout() {
+export default function Layout({ children }) {
   return (
-    // Main layout wrapper for entire app
     <div className="app-layout">
 
-      {/* Top navigation bar (visible on all pages) */}
+      {/* Top navigation bar */}
       <Navbar />
 
-      {/* Main content area where routed pages are rendered */}
+      {/* Main content */}
       <main className="app-main">
-        <Outlet />
+        {children ? children : <Outlet />}
       </main>
 
-      {/* Footer section (visible on all pages) */}
+      {/* Footer */}
       <Footer />
+
     </div>
   );
 }
