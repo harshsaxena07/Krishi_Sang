@@ -99,11 +99,16 @@ export default function ToolApproval() {
                 />
 
                 <div className="tool-content">
-                  <h3>{tool.name}</h3>
-                  <p>{tool.description}</p>
+                  <h3 className="tool-title">{tool.name}</h3>
 
-                  <p><strong>Price:</strong> ₹ {tool.price}</p>
-                  <p><strong>Location:</strong> {tool.location}</p>
+                  <p className="tool-desc">
+                    {tool.description}
+                  </p>
+
+                  <div className="tool-meta">
+                    <span className="tool-price">₹ {tool.price}</span>
+                    <span className="tool-location">{tool.location}</span>
+                  </div>
                 </div>
 
                 <div className="tool-actions">

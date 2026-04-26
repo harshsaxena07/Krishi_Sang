@@ -1,7 +1,7 @@
 .main-topbar {
   width: 100%;
   display: flex;
-  justify-content: flex-start !important; /* FORCE LEFT */
+  justify-content: flex-start !important; 
   align-items: center;
   margin-bottom: 20px;
 }

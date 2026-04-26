@@ -8,7 +8,7 @@ def validate_loan(name: str) -> bool:
     name = original.lower()
 
     # -------------------------
-    # 🔥 FORCE ALLOW IMPORTANT LOANS
+    # FORCE ALLOW IMPORTANT LOANS
     # -------------------------
     if "kisan credit" in name or "kcc" in name:
         return True

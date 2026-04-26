@@ -1,5 +1,5 @@
-/* Loans page */
-.loans-page {
+/* Marketplace page */
+.marketplace-page {
   width: 100%;
   min-height: calc(100vh - var(--navbar-height, 72px));
   padding: clamp(1rem, 3vw, 2rem);
@@ -9,19 +9,19 @@
     linear-gradient(135deg, #ecfdf5 0%, #d1fae5 38%, #f8fafc 100%);
 }
 
-.loans-page *,
-.loans-page *::before,
-.loans-page *::after {
+.marketplace-page *,
+.marketplace-page *::before,
+.marketplace-page *::after {
   box-sizing: border-box;
 }
 
-.loans-page-wide {
+.marketplace-page-wide {
   display: flex;
   flex-direction: column;
   gap: clamp(1rem, 2.5vw, 1.5rem);
 }
 
-.loans-page-header {
+.marketplace-page-header {
   position: relative;
   overflow: hidden;
   width: min(100%, 1180px);
@@ -35,7 +35,7 @@
   box-shadow: 0 22px 55px rgba(6, 78, 59, 0.18);
 }
 
-.loans-page-header::after {
+.marketplace-page-header::after {
   content: '';
   position: absolute;
   inset: auto -5rem -8rem auto;
@@ -46,7 +46,7 @@
   pointer-events: none;
 }
 
-.loans-page-badge {
+.marketplace-page-badge {
   display: inline-flex;
   align-items: center;
   width: fit-content;
@@ -65,11 +65,11 @@
   overflow-wrap: anywhere;
 }
 
-.loans-page-title {
+.marketplace-page-title {
   position: relative;
   z-index: 1;
   margin: 0.9rem 0 0.55rem;
-  max-width: 14ch;
+  max-width: 16ch;
   color: #f0fdf4;
   font-size: clamp(2rem, 5vw, 3.4rem);
   line-height: 1.05;
@@ -77,7 +77,7 @@
   text-wrap: balance;
 }
 
-.loans-page-subtitle {
+.marketplace-page-subtitle {
   position: relative;
   z-index: 1;
   margin: 0;
@@ -88,7 +88,7 @@
 }
 
 /* Filters */
-.loans-filters {
+.marketplace-filters {
   width: min(100%, 1180px);
   margin: 0 auto;
   display: flex;
@@ -103,13 +103,14 @@
   backdrop-filter: blur(12px);
 }
 
-.loan-filter-btn {
+.marketplace-filter-btn {
   min-height: 2.65rem;
   padding: 0.65rem 1.15rem;
   border-radius: 999px;
   border: 1px solid transparent;
   background: transparent;
   color: #065f46;
+  cursor: pointer;
   font-size: clamp(0.9rem, 1.7vw, var(--text-sm));
   font-weight: 800;
   line-height: 1.2;
@@ -121,22 +122,22 @@
     border-color 0.2s ease;
 }
 
-.loan-filter-btn:hover {
+.marketplace-filter-btn:hover {
   transform: translateY(-1px);
   border-color: rgba(16, 185, 129, 0.24);
   background: rgba(236, 253, 245, 0.9);
   color: #047857;
 }
 
-.loan-filter-btn.active {
+.marketplace-filter-btn.active {
   border-color: rgba(5, 150, 105, 0.28);
   background: linear-gradient(135deg, #059669, #10b981);
   color: #ffffff;
   box-shadow: 0 10px 22px rgba(5, 150, 105, 0.22);
 }
 
-.loans-page-warning,
-.loans-page-loading {
+.marketplace-page-warning,
+.marketplace-page-loading {
   width: min(100%, 1180px);
   margin: 0 auto;
   padding: 0.9rem 1rem;
@@ -146,20 +147,20 @@
   font-weight: 700;
 }
 
-.loans-page-warning {
+.marketplace-page-warning {
   border: 1px solid rgba(217, 119, 6, 0.24);
   background: #fffbeb;
   color: #b45309;
 }
 
-.loans-page-loading {
+.marketplace-page-loading {
   border: 1px solid rgba(6, 95, 70, 0.1);
   background: rgba(255, 255, 255, 0.78);
   color: #047857;
 }
 
 /* Grid */
-.loans-detail-grid {
+.marketplace-detail-grid {
   width: min(100%, 1180px);
   margin: 0 auto;
   display: grid;
@@ -169,83 +170,72 @@
 }
 
 /* Card */
-.loans-page .loan-detail-card {
+.marketplace-card {
   min-width: 0;
   height: 100%;
-  padding: 0;
   overflow: hidden;
   border: 1px solid rgba(6, 95, 70, 0.1);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.92);
   box-shadow: 0 14px 34px rgba(15, 23, 42, 0.09);
+  display: flex;
+  flex-direction: column;
   transition:
     transform 0.24s ease,
     box-shadow 0.24s ease,
     border-color 0.24s ease;
 }
 
-.loans-page .loan-detail-card:hover {
+.marketplace-card:hover {
   transform: translateY(-5px);
   border-color: rgba(5, 150, 105, 0.18);
   box-shadow: 0 22px 48px rgba(15, 23, 42, 0.14);
 }
 
-.loans-page .loan-detail-card-inner,
-.loans-page .scheme-detail-card-inner {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-width: 0;
-}
-
-.loans-page .loan-detail-image-wrap,
-.loans-page .scheme-detail-image-wrap {
+.marketplace-image-wrap {
   position: relative;
-  order: -1;
   width: 100%;
   height: clamp(11rem, 18vw, 14rem);
   flex: 0 0 auto;
   overflow: hidden;
-  background: #064e3b;
+  background: #f8fafc;
 }
 
-.loans-page .loan-detail-image-wrap::after,
-.loans-page .scheme-detail-image-wrap::after {
+.marketplace-image-wrap::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(6, 78, 59, 0.28), transparent 55%);
+  background: linear-gradient(to top, rgba(6, 78, 59, 0.16), transparent 55%);
   pointer-events: none;
 }
 
-.loans-page .loan-detail-image,
-.loans-page .scheme-detail-image {
+.marketplace-image-wrap img {
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
-  border-radius: 0;
-  background: #f8fafc;
   transition: transform 0.5s ease;
 }
 
-.loans-page .loan-detail-card:hover .loan-detail-image,
-.loans-page .loan-detail-card:hover .scheme-detail-image {
+.marketplace-card:hover .marketplace-image-wrap img {
   transform: scale(1.05);
 }
 
-.loans-page .loan-detail-content,
-.loans-page .scheme-detail-content {
+.marketplace-content {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
+  gap: 0.8rem;
   padding: clamp(1rem, 2.3vw, 1.35rem);
 }
 
-.loans-page .loan-detail-title,
-.loans-page .scheme-detail-title {
+.marketplace-card-head {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.marketplace-content h3 {
   margin: 0;
   color: #064e3b;
   font-size: clamp(1.08rem, 2vw, 1.28rem);
@@ -254,8 +244,16 @@
   overflow-wrap: anywhere;
 }
 
-.loans-page .loan-category-badge,
-.loans-page .scheme-category-badge {
+.marketplace-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.badge,
+.product-type-badge,
+.platform {
   display: inline-flex;
   align-items: center;
   width: fit-content;
@@ -271,35 +269,27 @@
   overflow-wrap: anywhere;
 }
 
-.loans-page .loan-detail-description,
-.loans-page .scheme-detail-description,
-.loans-page .loan-eligibility-text {
+.product-type-badge {
+  background: #f0fdf4;
+  color: #065f46;
+}
+
+.rating {
+  color: #64748b;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.desc {
   margin: 0;
   color: #475569;
   font-size: clamp(0.92rem, 1.7vw, 0.98rem);
-  line-height: 1.68;
+  line-height: 1.65;
   overflow-wrap: anywhere;
 }
 
-.loans-page .scheme-documents,
-.loans-page .loan-documents {
-  display: grid;
-  gap: 0.55rem;
-  margin: 0;
-  padding-top: 0.9rem;
-  border-top: 1px solid rgba(6, 95, 70, 0.1);
-}
-
-.loans-page .scheme-documents-label,
-.loans-page .loan-documents-label {
-  color: #065f46;
-  font-size: 0.9rem;
-  line-height: 1.35;
-  font-weight: 800;
-}
-
-.loans-page .scheme-documents-list,
-.loans-page .loan-documents-list {
+.benefits {
   display: grid;
   gap: 0.4rem;
   margin: 0;
@@ -309,136 +299,118 @@
   line-height: 1.55;
 }
 
-.loans-page .scheme-documents-list li,
-.loans-page .loan-documents-list li {
+.benefits li {
   padding-left: 0.15rem;
   overflow-wrap: anywhere;
 }
 
-.loans-page .scheme-documents-list li::marker,
-.loans-page .loan-documents-list li::marker {
+.benefits li::marker {
   color: #10b981;
 }
 
-.loans-page .loan-detail-actions,
-.loans-page .scheme-detail-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.7rem;
-  margin-top: auto;
-  padding-top: 0.25rem;
-}
-
-.loans-page .loan-detail-actions .btn,
-.loans-page .scheme-detail-actions .btn {
-  min-height: 2.55rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  white-space: normal;
-  text-align: center;
-  line-height: 1.2;
-  font-weight: 800;
-}
-
-.loans-page .loan-detail-actions .btn-secondary,
-.loans-page .scheme-detail-actions .btn-secondary {
-  background: linear-gradient(135deg, #059669, #10b981);
-  box-shadow: 0 10px 22px rgba(5, 150, 105, 0.2);
-}
-
-.loans-page-footer {
-  width: min(100%, 1180px);
-  margin: 0 auto;
-  text-align: center;
-}
-
-.loans-page-footer p {
-  margin: 0;
+.price {
+  width: fit-content;
   color: #047857;
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  line-height: 1.1;
+  font-weight: 900;
+}
+
+.platform {
+  margin-top: auto;
+}
+
+.buy-btn {
+  width: 100%;
+  min-height: 2.75rem;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #059669, #10b981);
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 800;
+  line-height: 1.2;
+  box-shadow: 0 10px 22px rgba(5, 150, 105, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.buy-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(5, 150, 105, 0.26);
+}
+
+.buy-btn:active {
+  transform: translateY(0);
 }
 
 @media (max-width: 1180px) {
-  .loans-detail-grid {
+  .marketplace-detail-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 768px) {
-  .loans-page {
+  .marketplace-page {
     padding: 1rem;
     padding-bottom: 1.5rem;
   }
 
-  .loans-page-header {
+  .marketplace-page-header {
     border-radius: 18px;
   }
 
-  .loans-filters {
+  .marketplace-filters {
     border-radius: 18px;
     justify-content: flex-start;
   }
 
-  .loan-filter-btn {
+  .marketplace-filter-btn {
     flex: 1 1 auto;
   }
 
-  .loans-detail-grid {
+  .marketplace-detail-grid {
     grid-template-columns: 1fr;
   }
 
-  .loans-page .loan-detail-card {
+  .marketplace-card {
     border-radius: 16px;
   }
 }
 
 @media (max-width: 480px) {
-  .loans-page {
+  .marketplace-page {
     padding: 0.75rem;
     padding-bottom: 1.25rem;
   }
 
-  .loans-page-wide {
+  .marketplace-page-wide {
     gap: 0.875rem;
   }
 
-  .loans-page-header {
+  .marketplace-page-header {
     padding: 1.15rem;
     border-radius: 16px;
   }
 
-  .loans-page-title {
+  .marketplace-page-title {
     max-width: none;
   }
 
-  .loans-filters {
+  .marketplace-filters {
     padding: 0.5rem;
     gap: 0.5rem;
   }
 
-  .loan-filter-btn {
+  .marketplace-filter-btn {
     width: 100%;
   }
 
-  .loans-page .loan-detail-image-wrap,
-  .loans-page .scheme-detail-image-wrap {
+  .marketplace-image-wrap {
     height: 10.5rem;
   }
 
-  .loans-page .loan-detail-content,
-  .loans-page .scheme-detail-content {
+  .marketplace-content {
     padding: 1rem;
-    gap: 0.8rem;
-  }
-
-  .loans-page .loan-detail-actions,
-  .loans-page .scheme-detail-actions,
-  .loans-page .loan-detail-actions .btn,
-  .loans-page .scheme-detail-actions .btn {
-    width: 100%;
+    gap: 0.75rem;
   }
 }

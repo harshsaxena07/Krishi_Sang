@@ -97,127 +97,127 @@ export default function CropDetection() {
 
       <section className="crop-recommendation-shell">
         <MainTopBar />
-        {/* Page header */}
+
         <header className="crop-recommendation-header">
           <span className="crop-reco-badge">{t.cropRecoBadge}</span>
           <h1>{t.cropRecoTitle}</h1>
           <p>{t.cropRecoSubtitle}</p>
         </header>
 
-        <div className="crop-reco-card">
+        <div className="crop-reco-layout">
+          <section className="crop-reco-card crop-reco-form-card">
 
-          {/* Card heading */}
-          <div className="crop-reco-card-head">
-            <h2>{t.cropRecoCardTitle}</h2>
-            <p>{t.cropRecoCardSubtitle}</p>
-          </div>
-
-          {/* Input form */}
-          <form className="crop-reco-form" onSubmit={handleSubmit}>
-
-            <div className="crop-reco-grid">
-
-              {/* Nitrogen input */}
-              <label className="crop-reco-field">
-                <span>{t.cropRecoNitrogenLabel}</span>
-                <div className="crop-reco-input-wrap">
-                  <input
-                    type="number"
-                    name="nitrogen"
-                    value={formData.nitrogen}
-                    onChange={handleChange}
-                    placeholder={t.cropRecoNitrogenPlaceholder}
-                    required
-                  />
-                  <small>{t.cropRecoNpkUnit}</small>
-                </div>
-              </label>
-
-              {/* Phosphorus input */}
-              <label className="crop-reco-field">
-                <span>{t.cropRecoPhosphorusLabel}</span>
-                <div className="crop-reco-input-wrap">
-                  <input
-                    type="number"
-                    name="phosphorus"
-                    value={formData.phosphorus}
-                    onChange={handleChange}
-                    placeholder={t.cropRecoPhosphorusPlaceholder}
-                    required
-                  />
-                  <small>{t.cropRecoNpkUnit}</small>
-                </div>
-              </label>
-
-              {/* Potassium input */}
-              <label className="crop-reco-field">
-                <span>{t.cropRecoPotassiumLabel}</span>
-                <div className="crop-reco-input-wrap">
-                  <input
-                    type="number"
-                    name="potassium"
-                    value={formData.potassium}
-                    onChange={handleChange}
-                    placeholder={t.cropRecoPotassiumPlaceholder}
-                    required
-                  />
-                  <small>{t.cropRecoNpkUnit}</small>
-                </div>
-              </label>
-
-              {/* pH input */}
-              <label className="crop-reco-field">
-                <span>{t.cropRecoPhLabel}</span>
-                <div className="crop-reco-input-wrap">
-                  <input
-                    type="number"
-                    step="0.1"
-                    name="ph"
-                    value={formData.ph}
-                    onChange={handleChange}
-                    placeholder={t.cropRecoPhPlaceholder}
-                    required
-                  />
-                  <small>{t.cropRecoPhUnit}</small>
-                </div>
-              </label>
-
+            <div className="crop-reco-card-head">
+              <span className="crop-reco-section-label">{t.cropRecoCardTitle}</span>
+              <h2>{t.cropRecoCardTitle}</h2>
+              <p>{t.cropRecoCardSubtitle}</p>
             </div>
 
-            {/* Submit button */}
-            <button type="submit" className="btn btn-secondary crop-reco-submit">
-              {loading ? "Analyzing..." : t.cropRecoSubmit}
-            </button>
+            <form className="crop-reco-form" onSubmit={handleSubmit}>
 
-          </form>
+              <div className="crop-reco-grid">
 
-          {/* Result section */}
+                <label className="crop-reco-field">
+                  <span>{t.cropRecoNitrogenLabel}</span>
+                  <div className="crop-reco-input-wrap">
+                    <input
+                      type="number"
+                      name="nitrogen"
+                      value={formData.nitrogen}
+                      onChange={handleChange}
+                      placeholder={t.cropRecoNitrogenPlaceholder}
+                      required
+                    />
+                    <small>{t.cropRecoNpkUnit}</small>
+                  </div>
+                </label>
+
+                <label className="crop-reco-field">
+                  <span>{t.cropRecoPhosphorusLabel}</span>
+                  <div className="crop-reco-input-wrap">
+                    <input
+                      type="number"
+                      name="phosphorus"
+                      value={formData.phosphorus}
+                      onChange={handleChange}
+                      placeholder={t.cropRecoPhosphorusPlaceholder}
+                      required
+                    />
+                    <small>{t.cropRecoNpkUnit}</small>
+                  </div>
+                </label>
+
+                <label className="crop-reco-field">
+                  <span>{t.cropRecoPotassiumLabel}</span>
+                  <div className="crop-reco-input-wrap">
+                    <input
+                      type="number"
+                      name="potassium"
+                      value={formData.potassium}
+                      onChange={handleChange}
+                      placeholder={t.cropRecoPotassiumPlaceholder}
+                      required
+                    />
+                    <small>{t.cropRecoNpkUnit}</small>
+                  </div>
+                </label>
+
+                <label className="crop-reco-field">
+                  <span>{t.cropRecoPhLabel}</span>
+                  <div className="crop-reco-input-wrap">
+                    <input
+                      type="number"
+                      step="0.1"
+                      name="ph"
+                      value={formData.ph}
+                      onChange={handleChange}
+                      placeholder={t.cropRecoPhPlaceholder}
+                      required
+                    />
+                    <small>{t.cropRecoPhUnit}</small>
+                  </div>
+                </label>
+
+              </div>
+
+              <div className="crop-reco-submit-row">
+                <button type="submit" className="btn btn-secondary crop-reco-submit">
+                  {loading ? "Analyzing..." : t.cropRecoSubmit}
+                </button>
+              </div>
+
+            </form>
+          </section>
+
           {showResult && result && (
             <section className="crop-reco-result">
 
-              <h3>{t.cropRecoResultTitle}</h3>
+              <div className="crop-reco-result-head">
+                <span className="crop-reco-section-label">{t.cropRecoResultTitle}</span>
+                <h3>{t.cropRecoResultTitle}</h3>
+              </div>
 
               <div className="result-main">
-                <div className="result-crop">
-                  🌱 {result.crop}
+                <div className="result-crop-card">
+                  <span>{t.cropRecoResultCropLabel}</span>
+                  <strong>{result.crop}</strong>
                 </div>
 
                 <div className="result-confidence">
-                  {t.cropRecoResultConfidenceLabel}:
-                  <span className="confidence-badge">
+                  <span>{t.cropRecoResultConfidenceLabel}</span>
+                  <strong className="confidence-badge">
                     {result.confidence}
-                  </span>
+                  </strong>
                 </div>
               </div>
 
               <div className="result-description">
-                <strong>{t.cropRecoResultReasonLabel}:</strong>
+                <strong>{t.cropRecoResultReasonLabel}</strong>
                 <p>{result.description}</p>
               </div>
 
             </section>
           )}
-
         </div>
       </section>
     </div>

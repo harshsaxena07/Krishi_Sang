@@ -6,26 +6,50 @@
 
 /* Dashboard-specific layout */
 .dashboard-page {
+  --dashboard-gap: clamp(1.25rem, 3vw, 2rem);
+  --dashboard-card-padding: clamp(1rem, 2.5vw, 1.5rem);
+  --dashboard-card-radius: 18px;
+  --dashboard-card-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  --dashboard-card-shadow-hover: 0 16px 38px rgba(15, 23, 42, 0.12);
+
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: var(--dashboard-gap);
+  width: 100%;
+  min-width: 0;
+  scroll-behavior: smooth;
+}
+
+.dashboard-page *,
+.dashboard-page *::before,
+.dashboard-page *::after {
+  box-sizing: border-box;
 }
 
 .dashboard-page .schemes-section,
 .dashboard-page .loans-section,
 .dashboard-page .farmer-dashboard-section {
   margin-top: 0;
+  min-width: 0;
+}
+
+.dashboard-loading {
+  display: grid;
+  min-height: 45vh;
+  place-items: center;
+  color: var(--color-text-muted);
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
 }
 
 /* Dashboard hero only */
 .dashboard-hero {
   position: relative;
-  height: 360px;
+  min-height: clamp(280px, 36vw, 360px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 40px;
-  border-radius: 20px;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  border-radius: 22px;
   overflow: hidden;
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
 }
@@ -45,33 +69,38 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 40px;
+  gap: clamp(1.25rem, 4vw, 2.5rem);
   width: 100%;
   height: 100%;
+  min-width: 0;
 }
 
 .dashboard-hero-text {
-  flex: 1;
+  flex: 1 1 18rem;
   min-width: 0;
 }
 
 .dashboard-hero-text h1 {
   color: white;
   margin: 0 0 var(--space-sm);
-  font-size: var(--text-3xl);
+  font-size: clamp(1.8rem, 4vw, var(--text-3xl));
+  line-height: 1.1;
+  text-wrap: balance;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .dashboard-hero-text p {
   color: rgba(255, 255, 255, 0.95);
   margin: 0;
-  font-size: var(--text-lg);
+  max-width: 54ch;
+  font-size: clamp(1rem, 2vw, var(--text-lg));
+  line-height: 1.55;
 }
 
 .dashboard-hero-image {
-  width: 280px;
-  height: 280px;
-  flex-shrink: 0;
+  width: clamp(180px, 26vw, 280px);
+  aspect-ratio: 1;
+  flex: 0 0 auto;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: var(--shadow-hover);
@@ -88,30 +117,12 @@
   object-fit: contain;
 }
 
-@media (max-width: 768px) {
-  .dashboard-hero {
-    height: auto;
-    min-height: 320px;
-    padding: var(--space-xl);
-  }
-
-  .dashboard-hero-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .dashboard-hero-image {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto;
-  }
-}
-
 /* Quick action buttons */
 .action-buttons {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--space-lg);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: clamp(0.875rem, 2vw, var(--space-lg));
+  width: 100%;
 }
 
 .action-btn {
@@ -119,22 +130,25 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--space-md);
-  padding: var(--space-xl);
+  gap: 0.75rem;
+  min-width: 0;
+  min-height: 7.5rem;
+  padding: clamp(1rem, 2.5vw, var(--space-xl));
   background: var(--color-secondary);
   color: white;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-card);
+  border-radius: 16px;
+  box-shadow: var(--dashboard-card-shadow);
+  text-align: center;
   text-decoration: none;
-  font-weight: 600;
-  font-size: var(--text-base);
-  transition: transform 0.2s, box-shadow 0.2s;
-  min-height: 120px;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 1.8vw, var(--text-base));
+  line-height: 1.35;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .action-btn:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
+  box-shadow: var(--dashboard-card-shadow-hover);
   color: white;
   text-decoration: none;
 }
@@ -146,169 +160,212 @@
 }
 
 .action-btn svg {
-  width: 36px;
-  height: 36px;
+  width: clamp(1.75rem, 4vw, 2.25rem);
+  height: clamp(1.75rem, 4vw, 2.25rem);
+  flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
-  .action-buttons {
-    grid-template-columns: 1fr;
-  }
-
-  .action-btn {
-    flex-direction: row;
-    justify-content: flex-start;
-    min-height: auto;
-    padding: var(--space-lg);
-  }
+.action-btn span {
+  overflow-wrap: anywhere;
 }
 
 /* Dashboard grids */
 .dashboard-page .schemes-grid,
 .dashboard-page .loans-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
-  margin-top: 20px;
-}
-
-@media (max-width: 768px) {
-  .dashboard-page .schemes-grid,
-  .dashboard-page .loans-grid {
-    grid-template-columns: 1fr;
-  }
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
+  gap: clamp(1rem, 2.6vw, 1.5rem);
+  margin-top: clamp(0.875rem, 2vw, 1.25rem);
+  align-items: stretch;
 }
 
 /* Shared scheme/loan card design */
-.scheme-card,
-.loan-card {
-  padding: 22px;
-  border-radius: 14px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease;
+.dashboard-page .scheme-card,
+.dashboard-page .loan-card,
+.dashboard-page .scheme-detail-card.loan-detail-card {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  padding: var(--dashboard-card-padding);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: var(--dashboard-card-radius);
+  box-shadow: var(--dashboard-card-shadow);
+  background: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.scheme-card:hover,
-.loan-card:hover {
+.dashboard-page .scheme-card:hover,
+.dashboard-page .loan-card:hover,
+.dashboard-page .scheme-detail-card.loan-detail-card:hover {
   transform: translateY(-3px);
+  box-shadow: var(--dashboard-card-shadow-hover);
+  border-color: rgba(15, 23, 42, 0.12);
 }
 
 .scheme-card-inner,
-.loan-card-inner {
+.loan-card-inner,
+.dashboard-page .scheme-detail-card-inner,
+.dashboard-page .loan-detail-card-inner {
   display: flex;
-  flex-direction: row;
   align-items: stretch;
-  gap: 18px;
+  gap: clamp(1rem, 2.4vw, 1.25rem);
   width: 100%;
+  min-width: 0;
 }
 
 .scheme-card-content,
-.loan-card-content {
-  flex: 1;
+.loan-card-content,
+.dashboard-page .scheme-detail-content,
+.dashboard-page .loan-detail-content {
+  flex: 1 1 0;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.625rem;
 }
 
 .scheme-card-content h3,
-.loan-card-content h3 {
+.loan-card-content h3,
+.dashboard-page .scheme-detail-title {
   margin: 0;
-  font-size: var(--text-lg);
+  color: var(--color-text);
+  font-size: clamp(1.05rem, 2vw, var(--text-lg));
+  line-height: 1.28;
+  overflow-wrap: anywhere;
 }
 
 .scheme-card-content p,
-.loan-card-content p {
+.loan-card-content p,
+.dashboard-page .scheme-detail-description,
+.dashboard-page .loan-eligibility-text,
+.dashboard-page .scheme-documents-list {
   margin: 0;
-  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-size: clamp(0.9rem, 1.8vw, var(--text-sm));
+  line-height: 1.55;
+  overflow-wrap: anywhere;
 }
 
-.card-badge {
+.card-badge,
+.dashboard-page .scheme-category-badge {
   width: fit-content;
-  padding: 4px 10px;
+  max-width: 100%;
+  padding: 0.35rem 0.7rem;
   border-radius: 999px;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   color: var(--color-primary-dark);
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 .card-meta {
   color: var(--color-text-muted);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-.card-actions {
+.dashboard-page .scheme-documents {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.dashboard-page .scheme-documents-label {
+  color: var(--color-text);
+  font-size: clamp(0.9rem, 1.8vw, var(--text-sm));
+}
+
+.dashboard-page .scheme-documents-list {
+  padding-left: 1.1rem;
+}
+
+.card-actions,
+.dashboard-page .scheme-detail-actions,
+.dashboard-page .loan-detail-actions {
   display: flex;
-  gap: 10px;
+  gap: 0.75rem;
   flex-wrap: wrap;
-  margin-top: 4px;
+  margin-top: auto;
+  padding-top: 0.35rem;
+}
+
+.card-actions .btn,
+.dashboard-page .scheme-detail-actions .btn,
+.dashboard-page .loan-detail-actions .btn,
+.dashboard-page .farmer-edit-btn,
+.dashboard-footer-btn {
+  min-height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.25;
 }
 
 .scheme-card-image,
 .loan-card-image,
-.card-image {
-  width: 220px;
-  min-height: 180px;
-  border-radius: 12px;
+.card-image,
+.dashboard-page .scheme-detail-image-wrap,
+.dashboard-page .loan-detail-image-wrap {
+  width: min(38%, 13.75rem);
+  min-width: 10rem;
+  min-height: 11rem;
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
   overflow: hidden;
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  background: var(--color-bg);
 }
 
 .scheme-card-image img,
 .loan-card-image img,
-.card-image img {
+.card-image img,
+.dashboard-page .scheme-detail-image,
+.dashboard-page .loan-detail-image {
   width: 100%;
   height: 100%;
+  display: block;
   object-fit: cover;
-}
-
-@media (max-width: 1024px) {
-  .scheme-card-inner,
-  .loan-card-inner {
-    flex-direction: column;
-  }
-
-  .scheme-card-image,
-  .loan-card-image,
-  .card-image {
-    width: 100%;
-    min-height: 190px;
-    order: -1;
-  }
 }
 
 /* Farmer dashboard */
 .farmer-dashboard-section .section-header {
-  margin-bottom: 20px;
+  margin-bottom: clamp(0.875rem, 2vw, 1.25rem);
 }
 
 .farmer-cards-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: clamp(1rem, 2.6vw, 1.5rem);
 }
 
 .farmer-card {
-  padding: 24px;
-  min-height: 160px;
+  min-width: 0;
+  min-height: 10rem;
+  padding: var(--dashboard-card-padding);
   background: white;
-  border-radius: 14px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-  transition: box-shadow 0.2s ease;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: var(--dashboard-card-radius);
+  box-shadow: var(--dashboard-card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
+  gap: 0.75rem;
 }
 
 .farmer-card:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: var(--dashboard-card-shadow-hover);
 }
 
 .farmer-card-title {
-  margin: 0 0 16px;
-  font-size: var(--text-lg);
-  font-weight: 600;
+  margin: 0;
+  font-size: clamp(1rem, 2vw, var(--text-lg));
+  line-height: 1.3;
+  font-weight: 700;
   color: var(--color-text);
 }
 
@@ -316,29 +373,33 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 1rem;
   margin-top: auto;
   flex-wrap: wrap;
+  min-width: 0;
 }
 
 .farmer-profile-left {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 0.875rem;
+  min-width: 0;
 }
 
 .farmer-avatar {
-  width: 56px;
-  height: 56px;
+  width: clamp(3rem, 10vw, 3.5rem);
+  aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
 }
 
 .farmer-name {
-  font-weight: 600;
-  font-size: var(--text-base);
+  min-width: 0;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 2vw, var(--text-base));
   color: var(--color-text);
+  overflow-wrap: anywhere;
 }
 
 .farmer-edit-btn {
@@ -354,21 +415,23 @@
 .farmer-card-predictions {
   background: #fffbea;
   border: 1px solid #f5e6a3;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 12px 28px rgba(133, 100, 4, 0.08);
 }
 
 .farmer-prediction-message {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 0.5rem;
   margin: 0 !important;
-  font-size: var(--text-sm);
+  font-size: clamp(0.9rem, 1.8vw, var(--text-sm));
 }
 
 .farmer-card-predictions .prediction-text {
+  min-width: 0;
   color: var(--color-text);
-  font-weight: 500;
+  font-weight: 600;
+  overflow-wrap: anywhere;
 }
 
 .prediction-icon {
@@ -379,22 +442,25 @@
 .farmer-card-links .quick-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 0.75rem;
   margin-top: auto;
 }
 
 .quick-link-pill {
+  min-height: 2.5rem;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-radius: 999px;
-  font-size: var(--text-sm);
-  font-weight: 500;
+  font-size: clamp(0.875rem, 1.8vw, var(--text-sm));
+  font-weight: 600;
   color: var(--color-text);
-  transition: background 0.2s, border-color 0.2s;
+  line-height: 1.25;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
 .quick-link-pill:hover {
@@ -403,46 +469,32 @@
   color: var(--color-primary-dark);
 }
 
-.farmer-detail {
-  margin: 0 !important;
-  font-size: var(--text-sm);
-  color: var(--color-text-muted);
-  line-height: 1.5;
+.quick-link-pill svg {
+  flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
-  .farmer-cards-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .farmer-card {
-    min-height: auto;
-  }
-
-  .farmer-card-profile .farmer-profile-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .farmer-edit-btn {
-    align-self: flex-end;
-  }
+.farmer-detail {
+  margin: 0 !important;
+  font-size: clamp(0.9rem, 1.8vw, var(--text-sm));
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  overflow-wrap: anywhere;
 }
 
 .dashboard-footer-image {
   position: relative;
   width: 100%;
-  margin-top: 10px;
-  height: 360px;
-  border-radius: 0;
+  min-height: clamp(220px, 34vw, 360px);
+  margin-top: 0.625rem;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--dashboard-card-shadow);
 }
 
 .dashboard-footer-image img {
   width: 100%;
   height: 100%;
+  min-height: inherit;
   object-fit: cover;
   display: block;
 }
@@ -452,8 +504,8 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.5),
-    rgba(0, 0, 0, 0.2)
+    rgba(0, 0, 0, 0.58),
+    rgba(0, 0, 0, 0.22)
   );
 }
 
@@ -466,35 +518,168 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 24px;
+  padding: clamp(1.25rem, 4vw, 2rem);
   color: white;
 }
 
 .dashboard-footer-title {
   margin: 0;
+  max-width: 18ch;
   color: white;
-  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
-  font-weight: 700;
+  font-size: clamp(1.45rem, 4vw, 2.2rem);
+  line-height: 1.15;
+  font-weight: 800;
+  text-wrap: balance;
 }
 
 .dashboard-footer-subtitle {
-  margin: 10px 0 18px;
+  margin: 0.625rem 0 1.125rem;
+  max-width: 42ch;
   color: rgba(255, 255, 255, 0.94);
-  font-size: var(--text-lg);
-  font-weight: 500;
+  font-size: clamp(0.95rem, 2vw, var(--text-lg));
+  line-height: 1.45;
+  font-weight: 600;
 }
 
 .dashboard-footer-btn {
-  min-width: 180px;
+  min-width: 11.25rem;
+}
+
+@media (max-width: 1024px) {
+  .scheme-card-inner,
+  .loan-card-inner,
+  .dashboard-page .scheme-detail-card-inner,
+  .dashboard-page .loan-detail-card-inner {
+    flex-direction: column;
+  }
+
+  .scheme-card-image,
+  .loan-card-image,
+  .card-image,
+  .dashboard-page .scheme-detail-image-wrap,
+  .dashboard-page .loan-detail-image-wrap {
+    order: -1;
+    width: 100%;
+    min-width: 0;
+    min-height: 11rem;
+    max-height: 16rem;
+  }
 }
 
 @media (max-width: 768px) {
-  .dashboard-footer-image {
-    height: 220px;
+  .dashboard-page {
+    --dashboard-gap: 1.25rem;
   }
 
-  .dashboard-footer-subtitle {
-    font-size: var(--text-base);
-    margin: 8px 0 14px;
+  .dashboard-hero {
+    border-radius: 18px;
+  }
+
+  .dashboard-hero-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .dashboard-hero-text p {
+    margin-inline: auto;
+  }
+
+  .action-buttons {
+    grid-template-columns: 1fr;
+  }
+
+  .action-btn {
+    min-height: 4.25rem;
+    flex-direction: row;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 1rem;
+  }
+
+  .dashboard-page .schemes-grid,
+  .dashboard-page .loans-grid,
+  .farmer-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .farmer-card {
+    min-height: auto;
+  }
+
+  .farmer-card-profile .farmer-profile-row {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-page {
+    --dashboard-card-padding: 1rem;
+    gap: 1rem;
+  }
+
+  .dashboard-hero {
+    min-height: auto;
+    padding: 1.1rem;
+    border-radius: 16px;
+  }
+
+  .dashboard-hero-content {
+    gap: 1rem;
+  }
+
+  .dashboard-hero-image {
+    width: min(68vw, 180px);
+  }
+
+  .dashboard-page .scheme-card,
+  .dashboard-page .loan-card,
+  .dashboard-page .scheme-detail-card.loan-detail-card,
+  .farmer-card {
+    border-radius: 14px;
+  }
+
+  .scheme-card-image,
+  .loan-card-image,
+  .card-image,
+  .dashboard-page .scheme-detail-image-wrap,
+  .dashboard-page .loan-detail-image-wrap {
+    min-height: 9.5rem;
+    border-radius: 12px;
+  }
+
+  .card-actions,
+  .dashboard-page .scheme-detail-actions,
+  .dashboard-page .loan-detail-actions {
+    gap: 0.625rem;
+  }
+
+  .card-actions .btn,
+  .dashboard-page .scheme-detail-actions .btn,
+  .dashboard-page .loan-detail-actions .btn {
+    width: 100%;
+  }
+
+  .farmer-profile-left {
+    width: 100%;
+  }
+
+  .farmer-edit-btn {
+    width: 100%;
+  }
+
+  .farmer-card-links .quick-links,
+  .quick-link-pill {
+    width: 100%;
+  }
+
+  .dashboard-footer-image {
+    min-height: 240px;
+    border-radius: 14px;
+  }
+
+  .dashboard-footer-btn {
+    width: 100%;
+    max-width: 17rem;
   }
 }

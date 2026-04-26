@@ -1,171 +1,294 @@
-/* KrishiSangh – Global styles */
 @import url('./styles/variables.css');
 @import url('./styles/base.css');
 @import url('./styles/layout.css');
 @import url('./styles/dashboard.css');
 @import url('./styles/pages.css');
 
-/* 🌿 Premium Auth Background */
-.auth-page {
+
+/* ============================= */
+/* LOGIN PAGE - FINAL CLEAN UI   */
+/* ============================= */
+html, body {
+  height: 100%;
+}
+
+.login-container {
   min-height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 20px;
-  overflow-y: auto;
-
-  /* 🌈 Animated gradient */
-  background: linear-gradient(-45deg, #e8f5e9, #c8e6c9, #a5d6a7, #e8f5e9);
-  background-size: 400% 400%;
-  animation: gradientMove 12s ease infinite;
-}
-
-/* 🌊 Gradient Animation */
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* 📦 Container */
-.auth-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: stretch;
-  justify-content: center;
-  max-width: 1050px;
-  width: 100%;
-  border-radius: 24px;
-  overflow: hidden;
-
-  /* ✨ Glass effect */
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.6);
-  box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+  background:
+    radial-gradient(circle at 80% 50%, rgba(31, 122, 84, 0.08), transparent 30rem),
+    linear-gradient(135deg, #eef7f0 0%, #f8fbf9 50%, #eef7f0 100%);
 }
 
-/* 🌱 LEFT PANEL */
-.auth-left {
-  flex: 1;
-  min-width: 300px;
-  background: linear-gradient(135deg, #2e7d32, #66bb6a);
-  color: white;
+
+/* ============================= */
+/* LEFT SIDE */
+/* ============================= */
+
+.login-left {
+  min-height: 100vh;   
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 2rem;
+  padding: 3rem;
   text-align: center;
-  padding: 60px 40px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #0f3d2e, #145a3c, #1f7a54);
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+
   position: relative;
+  overflow: hidden;
 }
 
-/* 🌟 Subtle overlay */
-.auth-left::after {
+/* subtle border effect */
+.login-left::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: url("https://www.transparenttextures.com/patterns/cubes.png");
-  opacity: 0.08;
+  inset: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
 }
 
-/* 🖼 Logo */
-.auth-logo {
-  width: 150px;
-  height: 150px;
-  object-fit: contain;
-  margin-bottom: 25px;
-  background: white;
-  padding: 15px;
+/* decorative circle */
+.login-left::after {
+  content: "";
+  position: absolute;
+  width: 26rem;
+  height: 26rem;
+  right: -10rem;
+  bottom: -10rem;
   border-radius: 50%;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  z-index: 1;
+
+  background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%);
 }
 
-/* 🟢 Title */
-.auth-title {
-  font-size: 34px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  z-index: 1;
+
+/* ============================= */
+/* LEFT CONTENT */
+/* ============================= */
+
+.login-logo {
+  width: 100px;
+  height: 100px;
+  padding: 14px;
+  border-radius: 24px;
+
+  background: white;
+
+  box-shadow: 
+    0 10px 30px rgba(0,0,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.6);
 }
 
-/* 🌾 Subtitle */
-.auth-subtitle {
-  font-size: 15px;
-  color: #e8f5e9;
-  line-height: 1.6;
-  max-width: 260px;
-  z-index: 1;
+.login-brand {
+  font-size: 3.4rem;
+  letter-spacing: 0.5px;
 }
 
-/* 🔐 RIGHT PANEL */
-.auth-right {
-  flex: 1;
-  min-width: 0;
-  padding: 50px 30px;
+.login-tagline {
+  font-size: 1.15rem;
+  font-weight: 500;
+
+  color: #d6f5e8;
+
+  letter-spacing: 0.5px;
+  margin-top: 0.6rem;
+
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+
+/* ============================= */
+/* RIGHT SIDE */
+/* ============================= */
+
+.login-right {
   display: flex;
   align-items: center;
   justify-content: center;
+
+  transform: translateX(-30px);
 }
 
-/* 🔥 Clerk Card Premium */
-.cl-card {
+
+/* ============================= */
+/* LOGIN CARD */
+/* ============================= */
+
+.login-right .cl-rootBox {
+  width: 100%;
+  max-width: 380px;
+}
+
+.login-card {
   width: 100% !important;
-  max-width: 420px !important;
-  border-radius: 18px !important;
+  max-width: 28rem !important;
+  padding: 2rem !important;
+  border-radius: 24px !important;
+  border: 1px solid rgba(20, 90, 60, 0.1) !important;
+  background: #ffffff !important;
+  box-shadow:
+    0 30px 80px rgba(15, 61, 46, 0.18),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset !important;
 
-  /* ✨ Glassmorphism */
-  backdrop-filter: blur(12px);
-  background: rgba(255,255,255,0.85) !important;
-
-  box-shadow: 0 15px 40px rgba(0,0,0,0.15) !important;
+  transition: all 0.25s ease !important;
 }
 
-/* 🔥 Button Enhancement */
-.cl-formButtonPrimary {
-  background: linear-gradient(135deg, #2e7d32, #43a047) !important;
-  border-radius: 10px !important;
-  transition: all 0.3s ease !important;
+.login-card:hover {
+  transform: translateY(-3px);
 }
 
-.cl-formButtonPrimary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(46,125,50,0.3);
+
+/* ============================= */
+/* TEXT */
+/* ============================= */
+
+.login-title {
+  color: #0f3d2e !important;
+  font-size: 2rem !important;
+  font-weight: 900 !important;
 }
 
-/* 📱 MOBILE */
-@media (max-width: 768px) {
-
-  .auth-container {
-    flex-direction: column;
-    border-radius: 18px;
-    margin-bottom: 40px;
-  }
-
-  .auth-left {
-    padding: 30px 20px;
-  }
-
-  .auth-logo {
-    width: 100px;
-    height: 100px;
-  }
-
-  .auth-title {
-    font-size: 22px;
-  }
-
-  .auth-subtitle {
-    font-size: 13px;
-  }
-
-  .auth-right {
-    padding: 20px 10px 30px;
-  }
+.login-subtitle {
+  color: #66766d !important;
+  font-size: 0.95rem !important;
 }
 
-/* 🔥 Safety */
-html, body {
-  height: 100%;
-  overflow-x: hidden;
+
+/* ============================= */
+/* INPUT */
+/* ============================= */
+
+.login-input {
+  min-height: 3rem !important;
+  border-radius: 14px !important;
+
+  border: 1px solid rgba(20, 90, 60, 0.16) !important;
+  background: #ffffff !important;
+
+  padding: 0.8rem 1rem !important;
+  color: #0f3d2e !important;
+
+  transition: all 0.2s ease !important;
+}
+
+.login-input:focus {
+  border-color: #1f7a54 !important;
+  box-shadow: 0 0 0 4px rgba(31, 122, 84, 0.14) !important;
+}
+
+
+/* ============================= */
+/* BUTTON */
+/* ============================= */
+
+.login-button {
+  border-radius: 999px !important;
+
+  background: linear-gradient(135deg, #145a3c, #1f7a54) !important;
+  color: #ffffff !important;
+
+  font-weight: 800 !important;
+
+  box-shadow: 0 14px 30px rgba(31, 122, 84, 0.25) !important;
+
+  transition: all 0.25s ease !important;
+
+  min-height: 2.8rem !important;
+  font-size: 0.95rem !important;
+}
+
+.login-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 38px rgba(31, 122, 84, 0.3) !important;
+}
+
+
+/* ============================= */
+/* GOOGLE BUTTON */
+/* ============================= */
+
+.login-google-button {
+  min-height: 3rem !important;
+  border-radius: 999px !important;
+
+  background: white !important;
+  border: 1px solid rgba(20, 90, 60, 0.14) !important;
+
+  color: #0f3d2e !important;
+  font-weight: 700 !important;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05) !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.login-google-button:hover {
+  transform: translateY(-1px);
+}
+
+
+/* ============================= */
+/* DIVIDER */
+/* ============================= */
+
+.login-divider-line {
+  background: rgba(20, 90, 60, 0.14) !important;
+}
+
+.login-divider-text {
+  color: #66766d !important;
+}
+
+
+/* ============================= */
+/* LINKS */
+/* ============================= */
+
+.login-link {
+  color: #1f7a54 !important;
+  font-weight: 700 !important;
+}
+
+
+/* ============================= */
+/* REMOVE DEV MODE */
+/* ============================= */
+
+.cl-internal-badge,
+.cl-footer,
+[data-localization-key="badge__developmentMode"] {
+  display: none !important;
+}
+
+
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 820px) {
+  .login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .login-left {
+    display: none;
+  }
+
+  .login-right {
+    transform: none;
+    width: 100%;
+  }
+
+  .login-card {
+    max-width: 100% !important;
+    padding: 1.5rem !important;
+  }
 }

@@ -215,221 +215,191 @@ export default function Profile() {
 
   return (
     <div className="page profile-page">
-      <h1>Farmer Profile Dashboard</h1>
+      <div className="profile-page__intro">
+        <h1>Farmer Profile Dashboard</h1>
+        <p>Manage your profile details and track the tools you have listed.</p>
+      </div>
 
       {saveMessage.text && (
-        <div
-          style={{
-            marginBottom: "14px",
-            padding: "10px 12px",
-            borderRadius: "8px",
-            border: `1px solid ${saveMessage.type === "success" ? "#81c784" : "#ef9a9a"}`,
-            background: saveMessage.type === "success" ? "#e8f5e9" : "#ffebee",
-            color: saveMessage.type === "success" ? "#1b5e20" : "#b71c1c",
-          }}
-        >
+        <div className={`profile-alert profile-alert--${saveMessage.type}`}>
           {saveMessage.text}
         </div>
       )}
 
-      <div className="card profile-card">
-        {profileLoading ? (
-          <p style={{ margin: 0 }}>Loading profile...</p>
-        ) : (
-          <>
-            <div className="profile-header">
-              <img
-                src={avatarSrc}
-                alt="Profile"
-                className="profile-avatar"
-                onError={(e) => {
-                  e.target.src = "https://via.placeholder.com/140x140?text=Farmer";
-                }}
-              />
-              <div>
-                <h2>{profile.name || "Farmer"}</h2>
-                <p className="profile-meta">{profile.phone || profile.email || "No contact added"}</p>
-                <p className="profile-meta">{profile.location || "Location not available"}</p>
-              </div>
-            </div>
+      <section className="profile-section" aria-labelledby="profile-section-title">
+        <div className="profile-section__heading">
+          <h2 id="profile-section-title">Profile Section</h2>
+        </div>
 
-            {profileError && (
-              <p style={{ color: "#c62828", marginBottom: "10px" }}>{profileError}</p>
-            )}
-
-            {isEditing ? (
-              <div style={{ display: "grid", gap: "10px", marginTop: "12px" }}>
-                <label>
-                  <span style={{ display: "block", marginBottom: "6px" }}>Name</span>
-                  <input
-                    className="form-input"
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                  />
-                </label>
-
-                <label>
-                  <span style={{ display: "block", marginBottom: "6px" }}>Phone</span>
-                  <input
-                    className="form-input"
-                    type="text"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                  />
-                </label>
-
-                <label>
-                  <span style={{ display: "block", marginBottom: "6px" }}>Location</span>
-                  <input
-                    className="form-input"
-                    type="text"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleInputChange}
-                  />
-                </label>
-
-                <div style={{ display: "flex", gap: "10px", marginTop: "8px" }}>
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={handleSaveProfile}
-                    disabled={saveLoading}
-                  >
-                    {saveLoading ? "Saving..." : "Save Profile"}
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-outline"
-                    onClick={() => {
-                      setIsEditing(false);
-                      setFormData({
-                        name: profile.name || "",
-                        phone: profile.phone || "",
-                        location: profile.location || "",
-                      });
-                    }}
-                    disabled={saveLoading}
-                  >
-                    Cancel
-                  </button>
+        <div className="card profile-card profile-card--hero">
+          {profileLoading ? (
+            <p className="profile-state-text">Loading profile...</p>
+          ) : (
+            <>
+              <div className="profile-header">
+                <img
+                  src={avatarSrc}
+                  alt="Profile"
+                  className="profile-avatar"
+                  onError={(e) => {
+                    e.target.src = "https://via.placeholder.com/140x140?text=Farmer";
+                  }}
+                />
+                <div className="profile-header__content">
+                  <h3>{profile.name || "Farmer"}</h3>
+                  <p className="profile-meta">{profile.phone || profile.email || "No contact added"}</p>
+                  <p className="profile-meta">{profile.location || "Location not available"}</p>
                 </div>
               </div>
-            ) : (
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => setIsEditing(true)}
-              >
-                Edit Profile
-              </button>
-            )}
-          </>
-        )}
-      </div>
 
-      <div className="card profile-card" style={{ marginTop: "18px" }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: "10px",
-            flexWrap: "wrap",
-            marginBottom: "10px",
-          }}
-        >
-          <h2 style={{ margin: 0 }}>Your Added Tools</h2>
-          <Link to="/add-tool" className="btn btn-secondary">
+              {profileError && (
+                <p className="profile-warning">{profileError}</p>
+              )}
+
+              {isEditing ? (
+                <div className="profile-form">
+                  <label>
+                    <span>Name</span>
+                    <input
+                      className="form-input"
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+
+                  <label>
+                    <span>Phone</span>
+                    <input
+                      className="form-input"
+                      type="text"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+
+                  <label>
+                    <span>Location</span>
+                    <input
+                      className="form-input"
+                      type="text"
+                      name="location"
+                      value={formData.location}
+                      onChange={handleInputChange}
+                    />
+                  </label>
+
+                  <div className="profile-form__actions">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={handleSaveProfile}
+                      disabled={saveLoading}
+                    >
+                      {saveLoading ? "Saving..." : "Save Profile"}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-outline"
+                      onClick={() => {
+                        setIsEditing(false);
+                        setFormData({
+                          name: profile.name || "",
+                          phone: profile.phone || "",
+                          location: profile.location || "",
+                        });
+                      }}
+                      disabled={saveLoading}
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={() => setIsEditing(true)}
+                >
+                  Edit Profile
+                </button>
+              )}
+            </>
+          )}
+        </div>
+      </section>
+
+      <section className="profile-section profile-section--tools" aria-labelledby="tools-section-title">
+        <div className="profile-section__heading profile-section__heading--tools">
+          <div>
+            <h2 id="tools-section-title">Your Added Tools</h2>
+            <p>Review availability, approval status, and listing details.</p>
+          </div>
+          <Link to="/add-tool" className="btn btn-secondary profile-add-tool">
             Add New Tool
           </Link>
         </div>
 
-        {toolsError && <p style={{ color: "#c62828" }}>{toolsError}</p>}
+        <div className="card profile-card profile-card--tools">
+          {toolsError && <p className="profile-warning">{toolsError}</p>}
 
-        {toolsLoading ? (
-          <p>Loading tools...</p>
-        ) : tools.length === 0 ? (
-          <p>You haven't added any tools yet</p>
-        ) : (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-              gap: "14px",
-              marginTop: "12px",
-            }}
-          >
-            {tools.map((tool) => {
-              const status = tool.status === "pending" ? "pending" : "approved";
-              const statusBg = status === "pending" ? "#fff3e0" : "#e8f5e9";
-              const statusColor = status === "pending" ? "#e65100" : "#1b5e20";
+          {toolsLoading ? (
+            <p className="profile-state-text">Loading tools...</p>
+          ) : tools.length === 0 ? (
+            <p className="profile-state-text">You haven't added any tools yet</p>
+          ) : (
+            <div className="tools-grid">
+              {tools.map((tool) => {
+                const status = tool.status === "pending" ? "pending" : "approved";
 
-              return (
-                <article key={tool.id} className="card" style={{ padding: "12px" }}>
-                  <img
-                    src={tool.image}
-                    alt={tool.name}
-                    style={{
-                      width: "100%",
-                      height: "150px",
-                      objectFit: "cover",
-                      borderRadius: "8px",
-                      marginBottom: "10px",
-                    }}
-                    onError={(e) => {
-                      e.target.src = "/images/default-tool.jpg";
-                    }}
-                  />
+                return (
+                  <article key={tool.id} className="tool-card">
+                    <img
+                      src={tool.image}
+                      alt={tool.name}
+                      className="tool-card__image"
+                      onError={(e) => {
+                        e.target.src = "/images/default-tool.jpg";
+                      }}
+                    />
 
-                  <h3 style={{ margin: "0 0 6px" }}>{tool.name}</h3>
-                  <p style={{ margin: "0 0 4px" }}>
-                    <strong>Price:</strong> Rs {tool.price_per_day}/day
-                  </p>
-                  <p style={{ margin: "0 0 8px" }}>
-                    <strong>Location:</strong> {tool.location}
-                  </p>
+                    <div className="tool-card__body">
+                      <div className="tool-card__main">
+                        <h3>{tool.name}</h3>
+                        <p className="tool-card__price">Rs {tool.price_per_day}/day</p>
+                        <p className="tool-card__location">{tool.location}</p>
+                      </div>
 
-                  <span
-                    style={{
-                      display: "inline-block",
-                      padding: "4px 10px",
-                      borderRadius: "999px",
-                      fontSize: "12px",
-                      fontWeight: "600",
-                      background: statusBg,
-                      color: statusColor,
-                      marginBottom: "10px",
-                    }}
-                  >
-                    {status.charAt(0).toUpperCase() + status.slice(1)}
-                  </span>
+                      <span className={`status-badge status-badge--${status}`}>
+                        {status.charAt(0).toUpperCase() + status.slice(1)}
+                      </span>
 
-                  <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-                    <button
-                      type="button"
-                      className="btn btn-outline"
-                      onClick={handleEditTool}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-outline"
-                      onClick={() => handleDeleteTool(tool.id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        )}
-      </div>
+                      <div className="tool-card__actions">
+                        <button
+                          type="button"
+                          className="btn tool-action tool-action--edit"
+                          onClick={handleEditTool}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          type="button"
+                          className="btn tool-action tool-action--delete"
+                          onClick={() => handleDeleteTool(tool.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 }

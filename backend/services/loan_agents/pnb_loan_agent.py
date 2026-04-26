@@ -67,7 +67,7 @@ def fetch_pnb_loans():
         print("PNB scraping failed:", e)
 
     # -------------------------
-    # 🔥 FALLBACK DATA
+    # FALLBACK DATA
     # -------------------------
     if len(loans) == 0:
         print("Using fallback PNB data")

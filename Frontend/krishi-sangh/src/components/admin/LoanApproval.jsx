@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "../../styles/loanApproval.css";
 import AdminTopBar from "../../components/admin/AdminTopBar";
+import { useNavigate } from "react-router-dom";
 
 function LoanApproval() {
   const [loans, setLoans] = useState([]);
@@ -9,7 +9,7 @@ function LoanApproval() {
   const [selectedLoan, setSelectedLoan] = useState(null);
   const [actionLoading, setActionLoading] = useState(null);
 
-  const navigate = useNavigate(); // ✅ navigation added
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchLoans();
@@ -20,9 +20,8 @@ function LoanApproval() {
       setLoading(true);
 
       const res = await fetch("http://localhost:5001/api/admin/loan-approval/");
-      if (!res.ok) throw new Error("API not responding");
-
       const data = await res.json();
+
       setLoans(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error("Error fetching loans:", err);
@@ -43,7 +42,7 @@ function LoanApproval() {
 
       setLoans((prev) => prev.filter((loan) => loan.id !== loanId));
     } catch (err) {
-      console.error("Approve error:", err);
+      console.error(err);
     } finally {
       setActionLoading(null);
     }
@@ -60,7 +59,7 @@ function LoanApproval() {
 
       setLoans((prev) => prev.filter((loan) => loan.id !== loanId));
     } catch (err) {
-      console.error("Reject error:", err);
+      console.error(err);
     } finally {
       setActionLoading(null);
     }
@@ -68,54 +67,66 @@ function LoanApproval() {
 
   return (
     <section className="loan-page">
-      <AdminTopBar rightButtonText="Back to Dashboard" rightPath="/admin" />
-
-      {/* HEADER */}
-      <div className="loan-header">
-        <div className="loan-header-text">
-          <h1>Loan Approval Dashboard</h1>
-          <p>Manage and review all farmer loan requests efficiently</p>
-        </div>
-
-        <div className="loan-header-stats">
-          <div className="stat-box">
-            <span className="stat-number">{loans.length}</span>
-            <span className="stat-label">Pending Requests</span>
-          </div>
-
-          <div className="stat-box">
-            <span className="stat-number">Admin</span>
-            <span className="stat-label">Role Access</span>
-          </div>
-        </div>
-      </div>
-
       <div className="loan-container">
-        {loading ? (
+        <div className="back-btn-wrapper">
+          <button onClick={() => navigate("/admin")} className="back-btn">
+            ← Back to Dashboard
+          </button>
+        </div>
+
+        {/* HEADER */}
+        <div className="loan-header-box">
+          <div className="loan-header-text">
+            <h1>Loan Approval Dashboard</h1>
+            <p>Manage and review all farmer loan requests efficiently</p>
+          </div>
+
+          <div className="loan-header-stats">
+            <div className="stat-box">
+              <span className="stat-number">{loans.length}</span>
+              <span className="stat-label">Pending Requests</span>
+            </div>
+
+            <div className="stat-box">
+              <span className="stat-number">Admin</span>
+              <span className="stat-label">Role Access</span>
+            </div>
+          </div>
+        </div>
+
+        {/* LOADING */}
+        {loading && (
           <div className="loader">
             <div className="spinner"></div>
-            <p>Fetching loan requests from database...</p>
+            <p>Fetching loan requests...</p>
           </div>
-        ) : loans.length === 0 ? (
+        )}
+
+        {/* EMPTY */}
+        {!loading && loans.length === 0 && (
           <div className="empty-state">
             <h2>No Loan Requests</h2>
             <p>All loan approvals are completed</p>
           </div>
-        ) : (
-          loans.map((loan) => (
-            <div key={loan.id} className="loan-card">
+        )}
 
-              <div className="loan-right">
+        {/* CARDS */}
+        {!loading && loans.length > 0 && (
+          <div className="loan-grid">
+            {loans.map((loan) => (
+              <div key={loan.id} className="loan-card">
+
                 <img
+                  className="loan-image"
                   src={loan.image || "/images/logo.png"}
                   alt={loan.name}
                 />
-              </div>
 
-              <div className="loan-left">
-                <h2 className="loan-title">{loan.name}</h2>
-                <span className="loan-bank">{loan.bank}</span>
-                <p className="loan-description">{loan.purpose}</p>
+                <div className="loan-content">
+                  <h3>{loan.name}</h3>
+                  <span className="loan-bank">{loan.bank}</span>
+                  <p>{loan.purpose}</p>
+                </div>
 
                 <div className="loan-actions">
                   <button onClick={() => setSelectedLoan(loan)}>
@@ -127,14 +138,9 @@ function LoanApproval() {
                     onClick={() => handleApprove(loan.id)}
                     disabled={actionLoading !== null}
                   >
-                    {actionLoading === loan.id + "_approve" ? (
-                      <span className="btn-loading">
-                        <span className="btn-loader"></span>
-                        Approving...
-                      </span>
-                    ) : (
-                      "Approve"
-                    )}
+                    {actionLoading === loan.id + "_approve"
+                      ? "Processing..."
+                      : "Approve"}
                   </button>
 
                   <button
@@ -142,22 +148,20 @@ function LoanApproval() {
                     onClick={() => handleReject(loan.id)}
                     disabled={actionLoading !== null}
                   >
-                    {actionLoading === loan.id + "_reject" ? (
-                      <span className="btn-loading">
-                        <span className="btn-loader"></span>
-                        Rejecting...
-                      </span>
-                    ) : (
-                      "Reject"
-                    )}
+                    {actionLoading === loan.id + "_reject"
+                      ? "Processing..."
+                      : "Reject"}
                   </button>
                 </div>
+
               </div>
-            </div>
-          ))
+            ))}
+          </div>
         )}
+
       </div>
 
+      {/* MODAL */}
       {selectedLoan && (
         <div className="modal-overlay" onClick={() => setSelectedLoan(null)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>

@@ -235,3 +235,99 @@
   color: var(--color-primary);
   margin: 0 0 var(--space-md) !important;
 }
+
+/* ============================= */
+/* 📱 MOBILE RESPONSIVE FIX */
+/* ============================= */
+
+@media (max-width: 1024px) {
+  .tool-marketplace-card {
+    grid-template-columns: 250px 1fr;
+  }
+
+  .tool-marketplace-actions {
+    grid-column: span 2;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .tool-call-btn,
+  .tool-book-btn {
+    width: 48%;
+  }
+}
+
+
+/* 📱 SMALL DEVICES */
+@media (max-width: 768px) {
+
+  .tool-marketplace-list {
+    gap: 16px;
+  }
+
+  .tool-marketplace-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* IMAGE */
+  .tool-marketplace-image-wrap {
+    width: 100%;
+    height: 200px;
+  }
+
+  .tool-marketplace-image {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* CONTENT */
+  .tool-marketplace-info {
+    padding: 16px;
+  }
+
+  /* ACTIONS */
+  .tool-marketplace-actions {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--color-border);
+    flex-direction: column;
+    padding: 14px;
+  }
+
+  .tool-call-btn,
+  .tool-book-btn {
+    width: 100%;
+  }
+
+  .tool-marketplace-price {
+    font-size: 1.4rem;
+  }
+
+}
+
+
+/* 📱 VERY SMALL DEVICES */
+@media (max-width: 480px) {
+
+  .tool-marketplace-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tool-marketplace-type {
+    font-size: 11px;
+  }
+
+  .tool-marketplace-price {
+    font-size: 1.2rem;
+  }
+
+  .tool-marketplace-features ul {
+    padding-left: 14px;
+  }
+
+}

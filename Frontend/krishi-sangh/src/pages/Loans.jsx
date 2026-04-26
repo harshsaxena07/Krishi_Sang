@@ -24,6 +24,7 @@ export default function Loans() {
   // Language-based UI content (manual i18n handling)
   const copy = language === 'hi'
     ? {
+        badge: 'à¤•à¤¿à¤¸à¤¾à¤¨ à¤µà¤¿à¤¤à¥à¤¤',
         title: 'बैंक ऋण योजनाएं',
         description:
           'किसानों के लिए विशेष रूप से बनाई गई विभिन्न बैंक ऋण योजनाएं देखें और अपनी कृषि आवश्यकताओं के लिए आसानी से वित्त प्राप्त करें।',
@@ -37,6 +38,7 @@ export default function Loans() {
         footer: 'KrishiSangh किसान वित्त सहायता',
       }
     : {
+        badge: 'Farmer Finance',
         title: 'Bank Loan Schemes',
         description:
           'Explore various bank loan schemes designed specifically for farmers.',
@@ -112,9 +114,10 @@ export default function Loans() {
 
     // Main loans page container
     <div className="page loans-page loans-page-wide">
-      <MainTopBar/>
-      {/* Page header */}
+      <MainTopBar />
+
       <header className="loans-page-header">
+        <span className="loans-page-badge">{copy.badge}</span>
         <h1 className="loans-page-title">{copy.title}</h1>
         <p className="loans-page-subtitle">{copy.description}</p>
       </header>
@@ -134,14 +137,14 @@ export default function Loans() {
 
       {/* Warning message (fallback or error) */}
       {warning && (
-        <p style={{ textAlign: "center", color: "orange" }}>
+        <p className="loans-page-warning">
           {warning}
         </p>
       )}
 
       {/* Loading state */}
       {loading ? (
-        <p style={{ textAlign: "center" }}>Loading loans...</p>
+        <p className="loans-page-loading">Loading loans...</p>
       ) : (
 
         // Render loans dynamically using LoanCard

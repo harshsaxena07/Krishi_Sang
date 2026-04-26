@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import MainTopBar from "../layout/MainTopBar";
+
 // Maximum allowed file size (10MB)
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
@@ -10,7 +11,7 @@ const API_URL = "http://127.0.0.1:5001/api/ai/disease-detection";
 // Icon for upload area
 function UploadIcon() {
   return (
-    <svg width="38" height="38" viewBox="0 0 24 24" fill="currentColor">
+    <svg width="38" height="38" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M19 20H5c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h4l2-2h2l2 2h4c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2zm-7-4l4-5h-3V8h-2v3H8l4 5z" />
     </svg>
   );
@@ -60,7 +61,7 @@ export default function ChatWindow() {
 
         const data = await res.json();
 
-        console.log("API RESPONSE:", data); 
+        console.log("API RESPONSE:", data);
 
         // Handle backend errors
         if (!res.ok) {
@@ -69,10 +70,10 @@ export default function ChatWindow() {
 
         // Store prediction result in state
         setResult({
-          disease: data.predicted_disease,
+          disease: data.disease,
           confidence: data.confidence,
           description: data.description,
-          treatment: "Follow proper treatment and consult expert",
+          treatment: data.treatment,
         });
 
       } catch (err) {
@@ -135,95 +136,148 @@ export default function ChatWindow() {
 
     // Main disease detection UI container
     <section className="disease-detection-shell">
-      <MainTopBar/>
-      {/* Header section */}
+      <MainTopBar />
+
       <header className="disease-detection-header">
         <span className="detection-badge">{t.detectionBadge}</span>
         <h1>{t.detectionTitle}</h1>
         <p>{t.detectionSubtitle}</p>
       </header>
 
-      <div className="detection-card">
+      <div className="detection-layout">
+        <div className="detection-card upload-card">
 
-        <div className="detection-card-head">
-          <h2>{t.uploadCardTitle}</h2>
-          <p>{t.uploadCardSubtitle}</p>
-        </div>
-
-        {/* If no image selected → show upload UI */}
-        {!image ? (
-          <div
-            className={`detection-drop-zone ${isDragging ? 'dragging' : ''}`}
-            onDragOver={(e) => {
-              e.preventDefault();
-              setIsDragging(true);
-            }}
-            onDragLeave={() => setIsDragging(false)}
-            onDrop={onDrop}
-            onClick={openFilePicker}
-          >
-            <UploadIcon />
-            <h3>{t.uploadClickText}</h3>
-            <p>{t.uploadDragText}</p>
-
-            <button className="btn btn-secondary detection-browse-btn">
-              {t.browseFiles}
-            </button>
-
-            {/* Hidden file input */}
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={handleInputChange}
-              className="detection-file-input"
-            />
+          <div className="detection-card-head">
+            <span className="detection-step-label">Upload</span>
+            <h2>{t.uploadCardTitle}</h2>
+            <p>{t.uploadCardSubtitle}</p>
           </div>
 
-        ) : (
+          {!image ? (
+            <div
+              className={`detection-drop-zone ${isDragging ? 'dragging' : ''}`}
+              onDragOver={(e) => {
+                e.preventDefault();
+                setIsDragging(true);
+              }}
+              onDragLeave={() => setIsDragging(false)}
+              onDrop={onDrop}
+              onClick={openFilePicker}
+            >
+              <div className="upload-icon-wrap">
+                <UploadIcon />
+              </div>
+              <h3>{t.uploadClickText}</h3>
+              <p>{t.uploadDragText}</p>
 
-          // If image is uploaded → show preview + result
-          <div className="detection-result-wrap">
+              <button type="button" className="btn btn-secondary detection-browse-btn">
+                {t.browseFiles}
+              </button>
 
-            <div className="detection-preview">
-              <img src={preview} alt="preview" />
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleInputChange}
+                className="detection-file-input"
+              />
             </div>
 
-            {loading && <p>Analyzing image...</p>}
+          ) : (
+
+            <div className="detection-preview-panel">
+              <div className="detection-preview">
+                <img src={preview} alt="preview" />
+              </div>
+
+              <button
+                type="button"
+                className="btn btn-outline detection-change-btn"
+                onClick={openFilePicker}
+              >
+                {t.browseFiles}
+              </button>
+
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleInputChange}
+                className="detection-file-input"
+              />
+            </div>
+          )}
+
+        </div>
+
+        <section className="detection-chat-card" aria-live="polite">
+          <div className="chat-window-header">
+            <div>
+              <span className="detection-step-label">AI Result</span>
+              <h2>{t.detectionResultTitle}</h2>
+            </div>
+            <span className={`chat-status ${loading ? 'is-loading' : result ? 'is-ready' : ''}`}>
+              {loading ? 'Analyzing' : result ? 'Ready' : 'Waiting'}
+            </span>
+          </div>
+
+          <div className="chat-messages">
+            {!image && (
+              <div className="chat-message system-message">
+                <div className="message-bubble">
+                  <strong>Upload a crop image</strong>
+                  <p>Select or drag a plant image to receive disease detection and treatment guidance.</p>
+                </div>
+              </div>
+            )}
+
+            {image && (
+              <div className="chat-message user-message">
+                <div className="message-bubble">
+                  <strong>Image uploaded</strong>
+                  <p>Your crop image has been sent for analysis.</p>
+                </div>
+              </div>
+            )}
+
+            {loading && (
+              <div className="chat-message system-message">
+                <div className="message-bubble loading-bubble">
+                  <span className="typing-dot" />
+                  <span className="typing-dot" />
+                  <span className="typing-dot" />
+                  <p>Analyzing image...</p>
+                </div>
+              </div>
+            )}
 
             {result && (
-              <section className="detection-result-card">
-
-                <h3>{t.detectionResultTitle}</h3>
-
-                <div className="result-top">
-                  <div className="result-disease">
-                    🦠 {result.disease}
+              <div className="chat-message system-message result-message">
+                <div className="message-bubble result-bubble">
+                  <div className="result-header">
+                    <span>{t.resultDiseaseLabel || 'Disease'}</span>
+                    <strong>{result.disease}</strong>
                   </div>
 
                   <div className="result-confidence">
-                    {t.resultConfidenceLabel}:
-                    <span className="confidence-badge">
-                      {result.confidence}
-                    </span>
+                    <span>{t.resultConfidenceLabel}</span>
+                    <strong className="confidence-badge">{result.confidence}</strong>
+                  </div>
+
+                  <div className="result-section">
+                    <h3>{t.resultDescriptionLabel}</h3>
+                    <p>{result.description}</p>
+                  </div>
+
+                  <div className="result-section">
+                    <h3>{t.resultTreatmentLabel}</h3>
+                    <p>{result.treatment}</p>
                   </div>
                 </div>
-
-                <div className="result-box">
-                  <strong>{t.resultDescriptionLabel}:</strong>
-                  <p>{result.description}</p>
-                </div>
-
-                <div className="result-box">
-                  <strong>{t.resultTreatmentLabel}:</strong>
-                  <p>{result.treatment}</p>
-                </div>
-
-              </section>
+              </div>
             )}
           </div>
-        )}
-
+        </section>
       </div>
     </section>
   );

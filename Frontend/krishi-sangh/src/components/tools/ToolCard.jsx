@@ -1,5 +1,7 @@
 import { useLanguage } from '../../context/LanguageContext';
 
+const BASE_URL = "http://127.0.0.1:5001";
+
 function PhoneIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -18,29 +20,14 @@ function CalendarIcon() {
 
 export default function ToolCard({ tool }) {
   const { language } = useLanguage();
-
   const isHindi = language === 'hi';
 
-  // Support both backend and old frontend keys
-  const name = isHindi
-    ? (tool.name_hi || tool.nameHi)
-    : tool.name;
-
-  const type = isHindi
-    ? (tool.type_hi || tool.typeHi)
-    : tool.type;
-
-  const location = isHindi
-    ? (tool.location_hi || tool.locationHi)
-    : tool.location;
-
-  const owner = isHindi
-    ? (tool.owner_hi || tool.ownerHi)
-    : tool.owner;
-
-  const features = isHindi
-    ? (tool.features_hi || tool.featuresHi)
-    : tool.features;
+  // TEXT HANDLING
+  const name = isHindi ? (tool.name_hi || tool.nameHi) : tool.name;
+  const type = isHindi ? (tool.type_hi || tool.typeHi) : tool.type;
+  const location = isHindi ? (tool.location_hi || tool.locationHi) : tool.location;
+  const owner = isHindi ? (tool.owner_hi || tool.ownerHi) : tool.owner;
+  const features = isHindi ? (tool.features_hi || tool.featuresHi) : tool.features;
 
   const price = tool.price_per_day || tool.pricePerDay;
 
@@ -64,7 +51,11 @@ export default function ToolCard({ tool }) {
         bookNow: 'Book Now',
       };
 
-  const imageSrc = tool.image || "/images/default-tool.jpg";
+  const imageSrc = tool.image
+    ? tool.image.startsWith("http")
+      ? tool.image
+      : `${BASE_URL}${tool.image}`
+    : `${BASE_URL}/images/default-tool.jpg`;
 
   return (
     <article className="card tool-marketplace-card">
@@ -76,7 +67,7 @@ export default function ToolCard({ tool }) {
           alt={name}
           className="tool-marketplace-image"
           onError={(e) => {
-            e.target.src = "/images/default-tool.jpg";
+            e.target.src = `${BASE_URL}/images/default-tool.jpg`;
           }}
         />
       </div>
@@ -96,7 +87,7 @@ export default function ToolCard({ tool }) {
         </p>
 
         {/* FEATURES */}
-        {features && (
+        {features && Array.isArray(features) && (
           <div className="tool-marketplace-features">
             <strong>{labels.features}:</strong>
             <ul>

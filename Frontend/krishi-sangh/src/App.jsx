@@ -17,49 +17,67 @@ import ToolApproval from "./components/admin/ToolApproval";
 import LoanApproval from "./components/admin/LoanApproval";
 import AddScheme from "./components/admin/AddScheme";
 import AddLoan from "./components/admin/AddLoan";
+import Marketplace from "./pages/Marketplace";
 
-// ✅ Clerk imports
 import {
   SignedIn,
   SignedOut,
   SignIn
 } from "@clerk/clerk-react";
 
+const signInAppearance = {
+  variables: {
+    colorPrimary: "#1f7a54",
+    colorText: "#0f3d2e",
+    colorTextSecondary: "#66766d",
+    colorBackground: "#ffffff",
+    colorInputBackground: "#ffffff",
+    colorInputText: "#0f3d2e",
+    borderRadius: "16px",
+    fontFamily: "Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+  },
+  elements: {
+    card: "login-card",
+    headerTitle: "login-title",
+    headerSubtitle: "login-subtitle",
+    formFieldInput: "login-input",
+    formButtonPrimary: "login-button",
+    socialButtonsBlockButton: "login-google-button",
+    dividerLine: "login-divider-line",
+    dividerText: "login-divider-text",
+    footerActionLink: "login-link",
+  },
+};
+
 export default function App() {
   return (
     <LanguageProvider>
       <BrowserRouter>
-
-        {/* 🔐 NOT LOGGED IN */}
         <SignedOut>
-          <div className="auth-page">
-            <div className="auth-container">
+          <main className="login-container">
+            <section className="login-left" aria-label="KrishiSangh introduction">
+              <img
+                src="images/logo.png"
+                alt="KrishiSangh Logo"
+                className="login-logo"
+              />
+              <h1 className="login-brand">KrishiSangh</h1>
+              <p className="login-tagline">
+                Empowering Farmers with Smart Technology
+              </p>
+            </section>
 
-              <div className="auth-left">
-                <img
-                  src="images/logo.png"
-                  alt="KrishiSangh Logo"
-                  className="auth-logo"
-                />
-                <h1 className="auth-title">KrishiSangh</h1>
-                <p className="auth-subtitle">
-                  Empowering Farmers with Smart Technology
-                </p>
-              </div>
-
-              <div className="auth-right">
-                <SignIn routing="hash" />
-              </div>
-
-            </div>
-          </div>
+            <section className="login-right" aria-label="Sign in">
+              <SignIn
+                routing="hash"
+                appearance={signInAppearance}
+              />
+            </section>
+          </main>
         </SignedOut>
 
-        {/* ✅ LOGGED IN */}
         <SignedIn>
           <Routes>
-
-            {/* 🌐 USER ROUTES (WITH LAYOUT) */}
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="dashboard" element={<Dashboard />} />
@@ -70,9 +88,9 @@ export default function App() {
               <Route path="add-tool" element={<AddTool />} />
               <Route path="chatbot" element={<Chatbot />} />
               <Route path="profile" element={<Profile />} />
+              <Route path="/marketplace" element={<Marketplace />} />
             </Route>
 
-            {/* 🔐 ADMIN DASHBOARD */}
             <Route
               path="/admin"
               element={
@@ -84,7 +102,6 @@ export default function App() {
               }
             />
 
-            {/* 🔐 TOOL APPROVAL PAGE */}
             <Route
               path="/admin/tools"
               element={
@@ -95,7 +112,7 @@ export default function App() {
                 </AdminRoute>
               }
             />
-            {/* Loan Approaal page */}
+
             <Route
               path="/admin/loans"
               element={
@@ -117,25 +134,21 @@ export default function App() {
                 </AdminRoute>
               }
             />
-            
-            {/* 🔐 ADD LOAN */}
-              <Route
-                path="/admin/add-loan"
-                element={
-                  <AdminRoute>
-                    <AdminLayout>
-                      <AddLoan />
-                    </AdminLayout>
-                  </AdminRoute>
-                }
-              />
 
-            {/* 🔁 Fallback */}
+            <Route
+              path="/admin/add-loan"
+              element={
+                <AdminRoute>
+                  <AdminLayout>
+                    <AddLoan />
+                  </AdminLayout>
+                </AdminRoute>
+              }
+            />
+
             <Route path="*" element={<Navigate to="/" replace />} />
-
           </Routes>
         </SignedIn>
-
       </BrowserRouter>
     </LanguageProvider>
   );

@@ -3,7 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { useLanguage } from '../../context/LanguageContext';
 import { languageOptions } from '../../translations';
 
-// ✅ Clerk import
+// Clerk import
 import { useClerk } from "@clerk/clerk-react";
 
 export default function Navbar() {
@@ -15,18 +15,19 @@ export default function Navbar() {
 
   const { language, setLanguage, t } = useLanguage();
 
-  // ✅ Clerk logout function
+  //Clerk logout function
   const { signOut } = useClerk();
 
   // navigation links
   const navLinks = [
     { path: '/', label: t.navHome },
     { path: '/dashboard', label: t.navDashboard },
-    { path: '/chatbot', label: t.navChatbot || 'Disease Detection' },
-    { path: '/crop-detection', label: t.navCropDetection || 'Crop Recommendation' },
+    { path: '/chatbot', label: t.navChatbot || 'Disease AI' },
+    { path: '/crop-detection', label: t.navCropDetection || 'Crop AI' },
     { path: '/tool-rental', label: t.navToolRental },
     { path: '/schemes', label: t.navSchemes },
     { path: '/loans', label: t.navLoans },
+    { path: '/marketplace', label: t.navMarketplace },
   ];
 
   // handle link click (close menus)
@@ -35,7 +36,7 @@ export default function Navbar() {
     setIsProfileOpen(false);
   };
 
-  // ✅ handle logout
+  //handle logout
   const handleLogout = async () => {
     await signOut();
     setIsProfileOpen(false);
@@ -104,7 +105,7 @@ export default function Navbar() {
                   {t.navProfile}
                 </Link>
 
-                {/* ✅ Working Logout */}
+                {/*Working Logout */}
                 <button
                   className="navbar-profile-item"
                   onClick={handleLogout}

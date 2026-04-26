@@ -86,9 +86,10 @@ export default function Schemes() {
 
     // Main schemes page container
     <div className="page schemes-page schemes-page-wide">
-      <MainTopBar/>
-      {/* Page header */}
+      <MainTopBar />
+
       <header className="schemes-page-header">
+        <span className="schemes-page-badge">{t.schemeBadge}</span>
         <h1 className="schemes-page-title">{t.schemesPageTitle}</h1>
         <p className="schemes-page-subtitle">{t.schemesPageSubtitle}</p>
       </header>
@@ -124,14 +125,14 @@ export default function Schemes() {
 
       {/* Show warning if backend fallback is used */}
       {warning && (
-        <p style={{ textAlign: "center", color: "orange" }}>
+        <p className="schemes-page-warning">
           {warning}
         </p>
       )}
 
       {/* Loading state */}
       {loading ? (
-        <p style={{ textAlign: "center" }}>Loading schemes...</p>
+        <p className="schemes-page-loading">Loading schemes...</p>
       ) : (
 
         // Render schemes dynamically using reusable card component

@@ -1,0 +1,29 @@
+[
+  { "id": 1, "name": "Nidhi Enterprises", "company": "Local", "city": "Dehradun", "latitude": 30.3165, "longitude": 78.0322 },
+  { "id": 2, "name": "Tea Garden Agro Store", "company": "Local", "city": "Dehradun", "latitude": 30.3250, "longitude": 78.0400 },
+  { "id": 3, "name": "Shree Vrindavan Farms", "company": "Local", "city": "Dehradun", "latitude": 30.3100, "longitude": 78.0500 },
+  { "id": 4, "name": "Shivalik Chemical Store", "company": "Local", "city": "Dehradun", "latitude": 30.3180, "longitude": 78.0350 },
+  { "id": 5, "name": "Doon Nursery Agro", "company": "Local", "city": "Dehradun", "latitude": 30.3200, "longitude": 78.0200 },
+  { "id": 6, "name": "Garhwal Agro Pro", "company": "Local", "city": "Dehradun", "latitude": 30.3050, "longitude": 78.0600 },
+
+  { "id": 7, "name": "BigHaat Partner Store", "company": "BigHaat", "city": "Haridwar", "latitude": 29.9457, "longitude": 78.1642 },
+  { "id": 8, "name": "AgroStar Retail Hub", "company": "AgroStar", "city": "Haridwar", "latitude": 29.9500, "longitude": 78.1700 },
+  { "id": 9, "name": "Kisan Seva Kendra", "company": "Local", "city": "Haridwar", "latitude": 29.9400, "longitude": 78.1500 },
+
+  { "id": 10, "name": "Rishikesh Agri Store", "company": "Local", "city": "Rishikesh", "latitude": 30.0869, "longitude": 78.2676 },
+  { "id": 11, "name": "DeHaat Center Rishikesh", "company": "DeHaat", "city": "Rishikesh", "latitude": 30.0900, "longitude": 78.2600 },
+
+  { "id": 12, "name": "Haldwani Krishi Store", "company": "Local", "city": "Haldwani", "latitude": 29.2183, "longitude": 79.5130 },
+  { "id": 13, "name": "Agro Input Center Haldwani", "company": "Local", "city": "Haldwani", "latitude": 29.2200, "longitude": 79.5200 },
+
+  { "id": 14, "name": "Rudrapur Agro Traders", "company": "Local", "city": "Rudrapur", "latitude": 28.9875, "longitude": 79.4140 },
+  { "id": 15, "name": "Farmer Input Hub Rudrapur", "company": "Local", "city": "Rudrapur", "latitude": 28.9900, "longitude": 79.4200 },
+
+  { "id": 16, "name": "Roorkee Kisan Store", "company": "Local", "city": "Roorkee", "latitude": 29.8543, "longitude": 77.8880 },
+  { "id": 17, "name": "Agri Care Roorkee", "company": "Local", "city": "Roorkee", "latitude": 29.8600, "longitude": 77.8800 },
+
+  { "id": 18, "name": "Pithoragarh Agri Center", "company": "Local", "city": "Pithoragarh", "latitude": 29.5829, "longitude": 80.2182 },
+  { "id": 19, "name": "Almora Krishi Seva", "company": "Local", "city": "Almora", "latitude": 29.5970, "longitude": 79.6590 },
+
+  { "id": 20, "name": "Udham Singh Nagar Agro Hub", "company": "Local", "city": "Udham Singh Nagar", "latitude": 28.9500, "longitude": 79.4000 }
+]

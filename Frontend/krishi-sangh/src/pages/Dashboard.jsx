@@ -10,20 +10,20 @@ import FarmerDashboard from '../components/dashboard/FarmerDashboard';
 
 export default function Dashboard() {
 
-  // ✅ Language + translation
+  // Language + translation
   const { t, language } = useLanguage();
 
-  // ✅ NEW: API state (replaces static data)
+  // API state (replaces static data)
   const [schemes, setSchemes] = useState([]);
   const [loans, setLoans] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // ✅ FETCH DATA FROM BACKEND
+  // Fetch data from backend
   useEffect(() => {
     const cachedSchemes = localStorage.getItem("schemes");
     const cachedLoans = localStorage.getItem("loans");
 
-    // ✅ If data exists in cache → use it instantly
+    // If data exists in cache, use it instantly
     if (cachedSchemes && cachedLoans) {
       setSchemes(JSON.parse(cachedSchemes));
       setLoans(JSON.parse(cachedLoans));
@@ -31,7 +31,7 @@ export default function Dashboard() {
       return;
     }
 
-    // ✅ Otherwise fetch from API
+    // Otherwise fetch from API
     Promise.all([
       fetch("http://127.0.0.1:5001/api/schemes/").then(res => res.json()),
       fetch("http://127.0.0.1:5001/api/loans").then(res => res.json())
@@ -43,7 +43,7 @@ export default function Dashboard() {
         setSchemes(schemesDataParsed);
         setLoans(loansDataParsed);
 
-        // ✅ Save to localStorage
+        // Save to localStorage
         localStorage.setItem("schemes", JSON.stringify(schemesDataParsed));
         localStorage.setItem("loans", JSON.stringify(loansDataParsed));
 
@@ -55,9 +55,9 @@ export default function Dashboard() {
       });
   }, []);
 
-  // ✅ Loading state (keeps your previous logic safe)
+  // Loading state
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="dashboard-loading">Loading...</div>;
   }
 
   // Normalize loan data (UNCHANGED LOGIC)
@@ -183,3 +183,4 @@ export default function Dashboard() {
     </div>
   );
 }
+
